@@ -438,7 +438,7 @@ out = File.open(outName, "w")
 
 # print to file
 # first line
-out.printf "function f=" + functionName + "("
+out.printf "function f = " + functionName + "("
 for i in 0..(vars.length - 1) 
   out.printf vars[i]
   if i < vars.length - 1
