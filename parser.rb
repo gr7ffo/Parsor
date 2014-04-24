@@ -21,7 +21,7 @@ EOF
 # Welcome
 puts $logo
 puts ""
-puts "1: Running preParser"
+puts "1: Preparsing"
 printf "1: Enter Filename: "
 
 #==========================================================================
@@ -91,7 +91,7 @@ puts "1: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 # parsEquation
 # Files ready for Work
 # out1.txt <= preParser
-puts "2: Running parsEquation"
+puts "2: Parsing Equations"
 
 # Searchterm for Equations
 printf "2: Enter your Parameter (e.g. UmformgradMAX): "
@@ -202,7 +202,7 @@ puts "2: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 #==========================================================================
 
 # ()remover
-puts "3: Now running ()remover"
+puts "3: Removing (...)"
 
 # Files ready for Work
 # equations.m <= parsEquation
@@ -245,7 +245,7 @@ puts "3: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 # out1.txt <= preParser
 # out2.txt <= ()remover
 # out3.txt <= ifElser
-puts "4: Now starting the ifElser"
+puts "4: Handling the if and elseif operators"
 
 # inputfile
 inName = "out3.txt"
@@ -383,7 +383,7 @@ calcFile = outName
 # out3.txt <= ifElser
 # out4.m <= generated from ifElser
 # varChar-variable for scanning for Variables
-puts "5: Now generating matlab functions with genMatFun"
+puts "5: Generating matlab functions"
 
 # Files
 inName = "equations.m"
