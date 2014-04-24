@@ -14,21 +14,21 @@ ____
 | |_) / _` | '__/ __|/ _ \| '__|
 |  __/ (_| | |  \__ \ (_) | |   
 |_|   \__,_|_|  |___/\___/|_|                                 
-                               v0.1
-created by Christopher Sauer, 2014        
+                              v0.1
+written by Christopher Sauer, 2014        
 EOF
 
 # Welcome
 puts $logo
 puts ""
-puts "1: Preparsing"
+puts "0: Executing Parsor"
 printf "1: Enter Filename: "
 
 #==========================================================================
 
 # preParser
 
-# Insert your filname
+# Insert your filename
 fileName = gets.chomp
 outName = "out1.txt"
 
@@ -49,7 +49,7 @@ rescue
   exit
 end
 
-# creating outputFile
+# Creating first outputfile
 out = File.open(outName, "w")
 
 # Display if file is writeable
@@ -69,7 +69,7 @@ countOut = 1
 # Do for each line
 inp.each do |line| 
   if countIn <= 3 && ans == "n" 
-    # Comment first three lines
+    # Put first three lines in comments
     out.puts("% " + line)
     countOut += 1
   end
@@ -81,9 +81,10 @@ inp.each do |line|
   countIn += 1
 end
 
-# Output
+# Close files
 inp.close
 out.close
+# Generate output
 puts "1: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
 #==========================================================================
@@ -103,7 +104,7 @@ lineSearchTermFound = 0
 printf "2: Enter your desired Equationname (e.g. LM): "
 eqName = gets.chomp
 
-# Filenames
+# Filenames input
 inName = "out1.txt"
 eqsName = "equations.m"
 
@@ -116,7 +117,7 @@ countIn = 1
 # Equationcounter
 countEq = 1
 
-# Stringesave
+# Stringsave
 addString = ""
 
 # Equationnumber 
@@ -139,7 +140,7 @@ inp.each do |line|
       searchTermFound = false
       # Output 
       eqs.printf(addString.delete "\n")
-      # silence console out
+      # silence console out in Matlab
       eqs.printf(";")
       eqs.printf("\n")
       countEq += 1
@@ -149,12 +150,13 @@ inp.each do |line|
   countIn += 1
 end
 
-# Short break write Files
+# write to files
 puts "2: Writing to Files..."
 inp.close
 eqs.close
+# reopen input
 inp = File.open(inName, "r+")
-# Output
+# Generate output
 puts "2: " + eqNum.to_s + " Equation(s) written to " + eqsName
 
 # reset Linecounter
@@ -162,7 +164,7 @@ countIn = 1
 # save values in array
 sav = []
 i = 0
-# Find Start of Equations
+# Find start of equations
 inp.each do |line|
   if line[searchTerm]
     sav[i] = countIn
@@ -171,10 +173,10 @@ inp.each do |line|
   countIn += 1
 end
 
-# Equationfound Information
+# equation found? (optional) 
 #puts "Equation found on line " + sav[0].to_s
  
-# But first let me take a (sel)file
+# But first let me (take) save a (sel)fi(l)e
 inp.close
 outName = "out2.txt"
 inp = File.open(inName, "r+")
@@ -183,7 +185,7 @@ out = File.open(outName, "w")
 # reset Linecounter
 countIn = 1
 countOut = 1
-# Write File
+# Write to outputfile
 inp.each do |line|
   if countIn < (sav[0] - 1) && line.length > 1
     out.puts(line)
@@ -196,7 +198,7 @@ end
 inp.close
 out.close
 
-# Output
+# Generating Output
 puts "2: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
 #==========================================================================
@@ -234,7 +236,7 @@ end
 inp.close
 out.close
 
-# Output
+# Generate Output
 puts "3: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
 #==========================================================================
@@ -247,10 +249,10 @@ puts "3: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 # out3.txt <= ifElser
 puts "4: Handling the if and elseif operators"
 
-# inputfile
+# Inputfile
 inName = "out3.txt"
 
-# output
+# Outputfile
 printf "4: Please enter the desired Name for my main output (e.g. out.m): "
 outName = gets.chomp
 
@@ -269,7 +271,7 @@ out = File.open(outName, "w")
 # Array for line lengths
 lengths = []
 
-# Do for each line
+# Do for each line to get lengths
 inp.each do |line|
   lengths[countIn] = line.length
   countIn += 1
@@ -287,10 +289,10 @@ countOut = 1
 inp = File.open(inName, "r+")
 out = File.open(outName, "w")
 
-# positionSafe
+# Safe positions of your variable for each line
 posVar = []
 
-# do
+# do this
 inp.each do |line|
   posVar[countIn] = line.index(varChar)
   countIn += 1 
@@ -304,7 +306,6 @@ out.close
 countIn = 1
 countOut = 1
 
-# Filehandler
 # Generate and open Files
 inp = File.open(inName, "r+")
 out = File.open(outName, "w")
@@ -312,7 +313,7 @@ out = File.open(outName, "w")
 #ifCounter
 ifCounter = 1
 
-# Dodo - ifElser (~works)
+# Dodo - ifElser (works?)
 inp.each do |line|
   if countIn == 1
     out.puts("if " + line)
@@ -367,10 +368,10 @@ end
 inp.close
 out.close
 
-# Output
+# Generating output
 puts "4: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
-# for functionfile generation
+# Needed later for functionfile generation
 calcFile = outName
 
 #==========================================================================
@@ -395,11 +396,11 @@ inp = File.open(inName, "r+")
 countIn = 1
 countOut = 1
 
-# Variable Array
+# Variable Array for your variables
 vars = []
 nVars = 0;
 
-# For the user
+# Infos for the user
 puts "5: Starting variable search"
 
 # Dododo
@@ -420,7 +421,7 @@ inp.each do |line|
   end
 end
 
-# take only unique variables 
+# Remove duplicate variables
 vars = vars.uniq
 if vars.length == 0
   puts "5: no Variables found!"
@@ -428,10 +429,10 @@ else
   puts "5: " + vars.length.to_s + " Variable(s) found!" 
 end
 
-# set functionName
+# Set name of your function for matlab
 printf "5: Please enter your desired functionName for Matlab (e.g. myfun): "
 
-# functionName
+# Generate file for function 
 functionName = gets.chomp
 outName = functionName + ".m" 
 out = File.open(outName, "w")
@@ -466,13 +467,22 @@ countOut += 1
 inp.close
 out.close
 
-# Output
+# Generating output
 puts "5: Functionfile " + outName + " and " + countOut.to_s + " lines written"
 
-# Last Call
+# Information for the user
 puts "0: Now use your generated Functionfile " + outName + " for simple Matlab Execution"
 
-# Removing unused files
-File.delete("out1.txt")
-File.delete("out2.txt")
-File.delete("out3.txt")
+# Ask if unused files should be deleted
+print "0: Should unused files be deleted? (y,n) "
+answer = gets.chomp
+
+if answer == "y"
+  # Removing unused files
+  File.delete("out1.txt")
+  File.delete("out2.txt")
+  File.delete("out3.txt")
+  puts "0: Parsing finished!"
+else
+  puts "0: Parsing finished!"
+end
