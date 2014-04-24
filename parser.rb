@@ -4,7 +4,8 @@
 
 # tested and working on: 
 # * ruby 2.1.1p76 (2014-02-24 revision 45161) [x86_64-darwin13.0]
-# * ...
+# * ruby 2.0.0-p451 (x64) [win]
+# should run if ruby >= 2.0.0
 
 #logo
 $logo = <<EOF
