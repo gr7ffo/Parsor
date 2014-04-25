@@ -22,6 +22,7 @@ EOF
 puts $logo
 puts ""
 puts "0: Executing Parsor"
+startTime = Time.now
 printf "1: Enter Filename: "
 
 #==========================================================================
@@ -313,6 +314,11 @@ out = File.open(outName, "w")
 #ifCounter
 ifCounter = 1
 
+# return?
+printf "4: Would you like to output only the first found solution? (y,n) "
+answerReturn = gets.chomp
+i = 1
+
 # Dodo - ifElser (works?)
 inp.each do |line|
   if countIn == 1
@@ -330,6 +336,10 @@ inp.each do |line|
     out.puts("end")
     countOut += 1
     ifCounter -= 1
+  end
+  # returns
+  if line[eqName] && answerReturn == "y" 
+    out.puts ("return")
   end
   countIn += 1
 end
@@ -439,7 +449,7 @@ out = File.open(outName, "w")
 
 # print to file
 # first line
-out.printf "function f = " + functionName + "("
+out.printf "function [f] = " + functionName + "("
 for i in 0..(vars.length - 1) 
   out.printf vars[i]
   if i < vars.length - 1
@@ -471,10 +481,10 @@ out.close
 puts "5: Functionfile " + outName + " and " + countOut.to_s + " lines written"
 
 # Information for the user
-puts "0: Now use your generated Functionfile " + outName + " for simple Matlab Execution"
+puts "5: Now use your generated Functionfile " + outName + " for simple Matlab Execution"
 
 # Ask if unused files should be deleted
-print "0: Should unused files be deleted? (y,n) "
+print "5: Should unused files be deleted? (y,n) "
 answer = gets.chomp
 
 if answer == "y"
@@ -482,7 +492,91 @@ if answer == "y"
   File.delete("out1.txt")
   File.delete("out2.txt")
   File.delete("out3.txt")
-  puts "0: Parsing finished!"
-else
-  puts "0: Parsing finished!"
 end
+
+#==========================================================================
+
+# optional implementation for matlab use of e.g. not your functionfile out.m
+printf "6: unlock newout? (y,n) "
+answerMagic = gets.chomp
+
+# testing
+if answerMagic == "y"
+  # Files
+  inName = calcFile
+  outName = "new" + calcFile
+  equationsName = "equations.m"
+  
+  # reset Linecounter
+  countIn = 1
+  countOut = 1
+  
+  # Launching Files
+  inp = File.open(inName, "r+")
+  out = File.open(outName, "w")
+
+  # test new function
+  out.printf "function [f] = " + functionName + "("
+  for i in 0..(vars.length - 1) 
+    out.printf vars[i]
+    if i < vars.length - 1
+      out.printf ","  
+    end
+  end
+  out.printf ")"
+  out.printf "\n"
+  countOut += 1
+  
+  # varDef
+  for i in 0..(vars.length - 1)
+    out.puts vars[i] + " = " + vars[i] + ";"
+    countOut += 1
+  end
+  
+  # Call equations and deliver output
+  out.puts(equationsName[0..(equationsName.index(".")-1)] + ";") 
+  countOut += 1
+  
+  # newline
+  out.puts("% This line is intentionally there")
+
+  # write out + set f
+  inp.each do |line|
+    if line[eqName]
+      out.puts(line[0..(line.index(eqName) - 1)] + "f = " + line[line.index(eqName)..-1])
+      countOut += 1
+    else
+      out.puts(line)
+      countOut += 1
+    end
+    countIn += 1
+  end
+
+  # endfunction
+  out.puts("end")
+  countOut += 1  
+
+  # *sigh* Filehandling...
+  inp.close
+  out.close
+
+  # Remove myfun.m and out.m
+  printf "6: Should unused Files be deleted? (y,n) "
+  answerDelete = gets.chomp
+
+  if answerDelete == "y"
+    File.delete(functionName + ".m")
+    File.delete(inName)
+  end
+
+  # Generating output
+  puts "6: Outputfile " + outName + " and " + countOut.to_s + " lines written"
+
+  # Info
+  puts "6: You can now use " + outName + " for direct matlab use of your values"
+end
+
+# Finish
+runtime = Time.now - startTime 
+puts "Runtime was: " + runtime.to_s + " Seconds"
+puts "Parsing finished, returning to console..."
