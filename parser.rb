@@ -392,7 +392,7 @@ calcFile = outName
 # out1.txt <= preParser
 # out2.txt <= ()remover
 # out3.txt <= ifElser
-# out4.m <= generated from ifElser
+# out.m <= generated from ifElser
 # varChar-variable for scanning for Variables
 puts "5: Generating matlab functions"
 
@@ -565,7 +565,7 @@ if answerMagic == "y"
   out.close
 
   # Remove myfun.m and out.m
-  printf "6: Should now not-needed Files, like " + functionName + ".m or " + inName + " be deleted? (y,n) "
+  printf "6: Should not-needed Files, like " + functionName + ".m or " + inName + " be deleted? (y,n) "
   answerDelete = gets.chomp
 
   if answerDelete == "y"
@@ -582,5 +582,5 @@ end
 
 # Finish
 runtime = Time.now - startTime 
-puts "Runtime was: " + runtime.to_s + " Seconds"
-puts "Parsing finished, returning to console..."
+puts "Parsor runtime was: " + runtime.to_s + " Seconds"
+puts "Parsing finished, returning to previous state..."
