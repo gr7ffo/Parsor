@@ -501,7 +501,7 @@ end
 # out.m - merge?
 # myfun.m - merge?  
 # optional implementation for matlab use of e.g. not your functionfile out.m
-printf "6: Do you want to merge the functions with the logic, ths is important if you plan to use your solution as a variable in matlab? (y,n) "
+printf "6: Do you want to merge the functions with the logic, this is important if you plan to use your solution as a variable in matlab? (y,n) "
 answerMagic = gets.chomp
 
 # testing
@@ -565,7 +565,7 @@ if answerMagic == "y"
   out.close
 
   # Remove myfun.m and out.m
-  printf "6: Should now-unused Files, like " + functionName + ".m or " + inName + " be deleted? (y,n) "
+  printf "6: Should now not-needed Files, like " + functionName + ".m or " + inName + " be deleted? (y,n) "
   answerDelete = gets.chomp
 
   if answerDelete == "y"
