@@ -102,7 +102,7 @@ searchTermFound = false
 lineSearchTermFound = 0
 
 # Equationterm
-printf "2: Enter your desired Equationname (e.g. LM): "
+printf "2: Enter your Modelname (e.g. LM for Linear Model): "
 eqName = gets.chomp
 
 # Filenames input
@@ -258,7 +258,7 @@ printf "4: Please enter the desired Name for my main output (e.g. out.m): "
 outName = gets.chomp
 
 # First Char of Variable
-printf "4: Please enter the First Char of your Variable: "
+printf "4: Please enter the First Char of your Variables (e.g. X for X_T0_A0): "
 varChar = gets.chomp
 
 # reset Linecounter
