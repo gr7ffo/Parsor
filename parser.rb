@@ -496,8 +496,12 @@ end
 
 #==========================================================================
 
+# newout
+# equations.m
+# out.m - merge?
+# myfun.m - merge?  
 # optional implementation for matlab use of e.g. not your functionfile out.m
-printf "6: unlock newout? (y,n) "
+printf "6: Do you want to merge the functions with the logic, ths is important if you plan to use your solution as a variable in matlab? (y,n) "
 answerMagic = gets.chomp
 
 # testing
