@@ -561,7 +561,7 @@ if answerMagic == "y"
   out.close
 
   # Remove myfun.m and out.m
-  printf "6: Should unused Files be deleted? (y,n) "
+  printf "6: Should now-unused Files, like " + functionName + ".m or " + inName + " be deleted? (y,n) "
   answerDelete = gets.chomp
 
   if answerDelete == "y"
