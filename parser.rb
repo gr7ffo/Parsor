@@ -25,9 +25,9 @@ puts "0: Executing Parsor"
 startTime = Time.now
 printf "1: Enter Filename: "
 
-#==========================================================================
 
 # preParser
+#==========================================================================
 
 # Insert your filename
 fileName = gets.chomp
@@ -59,7 +59,7 @@ if File.writable?(fileName)
 end
 
 # Remove first lines?
-printf "1: Would you like to remove the first lines or put them in a comment? (y,n) "
+printf "1: Would you like to remove the first lines (if not => comment)? (y,n) "
 ans = gets.chomp
 
 # Linecounter Inputfile
@@ -88,15 +88,16 @@ out.close
 # Generate output
 puts "1: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
-#==========================================================================
 
 # parsEquation
+#==========================================================================
+
 # Files ready for Work
 # out1.txt <= preParser
 puts "2: Parsing Equations"
 
 # Searchterm for Equations
-printf "2: Enter your Parameter (e.g. UmformgradMAX): "
+printf "2: Enter your label (e.g. UmformgradMAX): "
 searchTerm = gets.chomp
 searchTermFound = false
 lineSearchTermFound = 0
@@ -202,9 +203,10 @@ out.close
 # Generating Output
 puts "2: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
-#==========================================================================
 
 # ()remover
+#==========================================================================
+
 puts "3: Removing (...)"
 
 # Files ready for Work
@@ -240,9 +242,10 @@ out.close
 # Generate Output
 puts "3: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
+
+# ifElser (Brain)
 #==========================================================================
 
-# ifElser
 # Files ready for Work
 # equations.m <= parsEquation
 # out1.txt <= preParser
@@ -384,9 +387,9 @@ puts "4: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 # Needed later for functionfile generation
 calcFile = outName
 
+# genMatFun
 #==========================================================================
 
-# genMatFun
 # Files ready for Work
 # equations.m <= parsEquation, genMatFun
 # out1.txt <= preParser
@@ -494,9 +497,9 @@ if answer == "y"
   File.delete("out3.txt")
 end
 
+# newout
 #==========================================================================
 
-# newout
 # equations.m
 # out.m - merge?
 # myfun.m - merge?  
