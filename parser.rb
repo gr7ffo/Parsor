@@ -61,7 +61,7 @@ end
 # Remove first lines? - not activated
 #printf "1: Would you like to remove the first lines (if not => comment)? (y,n) "
 ans = "y"
-ans = gets.chomp
+#ans = gets.chomp
 
 # Linecounter Inputfile
 countIn = 1
@@ -332,7 +332,7 @@ ifCounter = 1
 # return? - not activated
 #printf "4: Would you like to output only the first found solution? (y,n) "
 answerReturn = "n"
-answerReturn = gets.chomp
+#answerReturn = gets.chomp
 i = 1
 
 # Dodo - ifElser (works?)
