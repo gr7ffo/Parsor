@@ -58,8 +58,9 @@ if File.writable?(fileName)
   puts "1: File is writeable, let's get it started!"
 end
 
-# Remove first lines?
-printf "1: Would you like to remove the first lines (if not => comment)? (y,n) "
+# Remove first lines? - not activated
+#printf "1: Would you like to remove the first lines (if not => comment)? (y,n) "
+ans = "y"
 ans = gets.chomp
 
 # Linecounter Inputfile
@@ -204,7 +205,7 @@ out.close
 puts "2: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
 
-# ()remover
+# ()remover & and if so ':'-adder
 #==========================================================================
 
 puts "3: Removing (...)"
@@ -213,6 +214,8 @@ puts "3: Removing (...)"
 # equations.m <= parsEquation
 # out1.txt <= preParser
 # out2.txt <= ()remover
+
+# add ':'
 inName = "out2.txt"
 outName = "out3.txt"
   
@@ -225,10 +228,17 @@ inp = File.open(inName, "r+")
 out = File.open(outName, "w")
 
 inp.each do |line|
-  if line["("]
-    newline = line[0..(line.index('(') - 1)]
+  if line[":"] == nil && line[eqName] 
+    # add ':'
+    newline = line[0..(line.index(eqName[0]) - 1)] + ":" + line[(line.index(eqName[0]) - 1)..-1]
+    # remove (...)
+    newline = newline[0..(newline.index('(') - 1)]
     out.puts(newline)
     countOut += 1
+    # if both is there
+  elsif line[":"] && line["("]
+    newline = line[0..(line.index('(') - 1)]
+    out.puts(newline)
   else
     out.puts(line)
   end
@@ -243,7 +253,7 @@ out.close
 puts "3: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
 
-# ifElser (Brain)
+# ifElser (THE Brain)
 #==========================================================================
 
 # Files ready for Work
@@ -302,6 +312,8 @@ inp.each do |line|
   countIn += 1 
 end
 
+puts posVar
+
 # *sigh* Filehandling...
 inp.close
 out.close
@@ -317,8 +329,9 @@ out = File.open(outName, "w")
 #ifCounter
 ifCounter = 1
 
-# return?
-printf "4: Would you like to output only the first found solution? (y,n) "
+# return? - not activated
+#printf "4: Would you like to output only the first found solution? (y,n) "
+answerReturn = "n"
 answerReturn = gets.chomp
 i = 1
 
@@ -336,6 +349,7 @@ inp.each do |line|
     out.puts("elseif " + line)
     countOut += 1
   elsif posVar[(countIn + 1)] < posVar[(countIn)]
+    out.puts(line)
     out.puts("end")
     countOut += 1
     ifCounter -= 1
@@ -353,30 +367,6 @@ for i in 2..ifCounter
   countOut += 1
 end
 
-#== older way ==#
-#runvariable i
-#ifCounter = 1
-## nearly~Working
-# do for each
-#inp.each do |line|
-# Insert if when line has greater or equal length
-#  if lengths[countIn].to_i > lengths[(countIn - 1)].to_i 
-#    ifCounter += 1
-#    out.puts("if " + line)
-#    countOut += 1
-#  else
-#    ifCounter += 1
-#    out.puts("elsif " + line)
-#    countOut += 1
-#  end
-#  countIn += 1
-#end
-#for i in 2..ifCounter
-#  out.puts("end")
-#  countOut += 1
-#end
-#== end ==#
-
 # *sigh* Filehandling...
 inp.close
 out.close
@@ -386,6 +376,7 @@ puts "4: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
 # Needed later for functionfile generation
 calcFile = outName
+
 
 # genMatFun
 #==========================================================================
