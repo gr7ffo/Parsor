@@ -205,7 +205,7 @@ out.close
 puts "2: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
 
-# ()remover & and if so ':'-adder
+# ()remover
 #==========================================================================
 
 puts "3: Removing (...)"
@@ -227,16 +227,9 @@ countOut = 1
 inp = File.open(inName, "r+")
 out = File.open(outName, "w")
 
+# cut line from '('
 inp.each do |line|
-  if line[":"] == nil && line[eqName]
-    # add ':'
-    newline = line[0..(line.index(eqName[0]) - 1)] + ":" + line[(line.index(eqName[0]) - 1)..-1]
-    # remove (...)
-    newline = newline[0..(newline.index('(') - 1)]
-    out.puts(newline)
-    countOut += 1
-    # if both is there
-  elsif line[":"] && line["("]
+  if line["("]
     newline = line[0..(line.index('(') - 1)]
     out.puts(newline)
   else
