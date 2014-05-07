@@ -334,7 +334,6 @@ inp.each do |line|
     out.puts("elseif " + line)
     countOut += 1
   elsif posVar[countIn] < posVar[(countIn - 1)]
-    # NOT WORKING
     difference = posVar[(countIn - 1)] - posVar[countIn]
     countToEnd = difference/3
     for i in 1..countToEnd
@@ -342,7 +341,6 @@ inp.each do |line|
       ifCounter -= 1
     end
     out.puts("elseif " + line)
-    # NOT WORKING
   end
   countIn += 1
 end
@@ -472,6 +470,93 @@ if answer == "y"
   File.delete("out1.txt")
   File.delete("out2.txt")
   File.delete("out3.txt")
+end
+
+
+# newout
+#==========================================================================
+
+# equations.m
+# out.m - merge?
+# myfun.m - merge?
+# optional implementation for matlab use of e.g. not your functionfile out.m
+printf "6: Do you want to merge the functions with the logic, this is important if you plan to use your solution as a variable in matlab? (y,n) "
+answerMagic = gets.chomp
+
+# testing
+if answerMagic == "y"
+  # Files
+  inName = calcFile
+  outName = "new" + calcFile
+  equationsName = "equations.m"
+
+  # reset Linecounter
+  countIn = 1
+  countOut = 1
+
+  # Launching Files
+  inp = File.open(inName, "r+")
+  out = File.open(outName, "w")
+
+  # test new function
+  out.printf "function [f] = " + outName[0..-3] + "("
+  for i in 0..(vars.length - 1)
+    out.printf vars[i]
+    if i < vars.length - 1
+      out.printf ","
+    end
+  end
+  out.printf ")"
+  out.printf "\n"
+  countOut += 1
+
+  # varDef
+  for i in 0..(vars.length - 1)
+    out.puts vars[i] + " = " + vars[i] + ";"
+    countOut += 1
+  end
+
+  # Call equations and deliver output
+  out.puts(equationsName[0..(equationsName.index(".")-1)] + ";")
+  countOut += 1
+
+  # newline
+  out.puts("% This line is intentionally there")
+
+  # write out + set f
+  inp.each do |line|
+    if line[eqName]
+      out.puts(line[0..(line.index(eqName) - 1)] + "f = " + line[line.index(eqName)..-2] + ";" + "\n")
+      countOut += 1
+    else
+      out.puts(line)
+      countOut += 1
+    end
+    countIn += 1
+  end
+
+  # endfunction
+  out.puts("end")
+  countOut += 1
+
+  # *sigh* Filehandling...
+  inp.close
+  out.close
+
+  # Remove myfun.m and out.m
+  printf "6: Should not-needed Files, like " + functionName + ".m or " + inName + " be deleted? (y,n) "
+  answerDelete = gets.chomp
+
+  if answerDelete == "y"
+    File.delete(functionName + ".m")
+    File.delete(inName)
+  end
+
+  # Generating output
+  puts "6: Outputfile " + outName + " and " + countOut.to_s + " lines written"
+
+  # Info
+  puts "6: You can now use " + outName + " for direct matlab use of your values"
 end
 
 # Finish
