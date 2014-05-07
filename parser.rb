@@ -14,7 +14,7 @@ ____
 | |_) / _` | '__/ __|/ _ \| '__|
 |  __/ (_| | |  \__ \ (_) | |
 |_|   \__,_|_|  |___/\___/|_|
-                              v0.3
+                              v0.4
 written by Christopher Sauer, 2014
 EOF
 
@@ -98,13 +98,13 @@ puts "1: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 puts "2: Parsing Equations"
 
 # Searchterm for Equations
-printf "2: Enter your label (e.g. UmformgradMAX): "
+printf "2: Enter your prediction(label) (e.g. UmformgradMAX): "
 searchTerm = gets.chomp
 searchTermFound = false
 lineSearchTermFound = 0
 
 # Equationterm
-printf "2: Enter your Modelname (e.g. LM for Linear Model): "
+printf "2: Enter your modelname (e.g. LM for Linear Model): "
 eqName = gets.chomp
 
 # Filenames input
@@ -259,9 +259,10 @@ puts "4: Handling the if and elseif operators"
 # Inputfile
 inName = "out3.txt"
 
-# Outputfile
-printf "4: Please enter the desired Name for my main output (e.g. out.m): "
-outName = gets.chomp
+# Outputfile - not activated
+#printf "4: Please enter the desired Name for my main output (e.g. out.m): "
+#outName = gets.chomp
+outName = "out.m"
 
 # First Char of Variable
 printf "4: Please enter the First Char of your Variables (e.g. X for X_T0_A0): "
@@ -459,7 +460,7 @@ out.close
 puts "5: Functionfile " + outName + " and " + countOut.to_s + " lines written"
 
 # Information for the user
-puts "5: Now use your generated Functionfile " + outName + " for simple Matlab Execution"
+puts "5: Now use your generated Functionfile " + outName + " for simple Matlab Execution without variable handling for Matlab"
 
 # Ask if unused files should be deleted
 print "5: Should unused files be deleted? (y,n) "
@@ -480,11 +481,12 @@ end
 # out.m - merge?
 # myfun.m - merge?
 # optional implementation for matlab use of e.g. not your functionfile out.m
-printf "6: Do you want to merge the functions with the logic, this is important if you plan to use your solution as a variable in matlab? (y,n) "
+printf "6: Do you want to use your solution as a variable in matlab? (y,n) "
 answerMagic = gets.chomp
 
 # testing
 if answerMagic == "y"
+  puts "6: Generating new files..."
   # Files
   inName = calcFile
   outName = "new" + calcFile
@@ -543,9 +545,10 @@ if answerMagic == "y"
   inp.close
   out.close
 
-  # Remove myfun.m and out.m
-  printf "6: Should not-needed Files, like " + functionName + ".m or " + inName + " be deleted? (y,n) "
-  answerDelete = gets.chomp
+  # Remove myfun.m and out.m - not activated
+  #printf "6: Should not-needed Files, like " + functionName + ".m or " + inName + " be deleted? (y,n) "
+  #answerDelete = gets.chomp
+  answerDelete = "y"
 
   if answerDelete == "y"
     File.delete(functionName + ".m")
@@ -556,7 +559,7 @@ if answerMagic == "y"
   puts "6: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
   # Info
-  puts "6: You can now use " + outName + " for direct matlab use of your values"
+  puts "6: You can now use " + outName + " as a function for direct matlab use of your values"
 end
 
 # Finish
