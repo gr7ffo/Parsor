@@ -2,20 +2,20 @@
 # Purpose: Parsing Rapidminer to Matlab
 # Written by: Christopher Sauer, 2014
 
-# tested and working on: 
+# tested and working on:
 # * ruby 2.1.1p76 (2014-02-24 revision 45161) [x86_64-darwin13.0]
 # * ruby 2.0.0-p451 (x64) [win]
 # should run if ruby >= 2.0.0
 
 #logo
 $logo = <<EOF
-____                           
-|  _ \ __ _ _ __ ___  ___  _ __ 
+____
+|  _ \ __ _ _ __ ___  ___  _ __
 | |_) / _` | '__/ __|/ _ \| '__|
-|  __/ (_| | |  \__ \ (_) | |   
-|_|   \__,_|_|  |___/\___/|_|                                 
-                             v0.2b
-written by Christopher Sauer, 2014        
+|  __/ (_| | |  \__ \ (_) | |
+|_|   \__,_|_|  |___/\___/|_|
+                             v0.3b
+written by Christopher Sauer, 2014
 EOF
 
 # Welcome
@@ -69,13 +69,13 @@ countIn = 1
 countOut = 1
 
 # Do for each line
-inp.each do |line| 
-  if countIn <= 3 && ans == "n" 
+inp.each do |line|
+  if countIn <= 3 && ans == "n"
     # Put first three lines in comments
     out.puts("% " + line)
     countOut += 1
   end
-  if countIn > 3 
+  if countIn > 3
     # Remove '|', ':'
     out.puts(line.tr(':|','').to_s)
     countOut += 1
@@ -123,14 +123,14 @@ countEq = 1
 # Stringsave
 addString = ""
 
-# Equationnumber 
+# Equationnumber
 eqNum = 1
 
 # Equationswrite started yet?
 startEquations = false
 
 # Do for each line
-inp.each do |line| 
+inp.each do |line|
   if line[searchTerm]
     searchTermFound = true
     lineSearchTermFound = countIn
@@ -141,7 +141,7 @@ inp.each do |line|
     addString << line.to_s
     if line.length == 1
       searchTermFound = false
-      # Output 
+      # Output
       eqs.printf(addString.delete "\n")
       # silence console out in Matlab
       eqs.printf(";")
@@ -176,9 +176,9 @@ inp.each do |line|
   countIn += 1
 end
 
-# equation found? (optional) 
+# equation found? (optional)
 #puts "Equation found on line " + sav[0].to_s
- 
+
 # But first let me (take) save a (sel)fi(l)e
 inp.close
 outName = "out2.txt"
@@ -218,7 +218,7 @@ puts "3: Removing (...)"
 # add ':'
 inName = "out2.txt"
 outName = "out3.txt"
-  
+
 # reset Linecounter
 countIn = 1
 countOut = 1
@@ -228,7 +228,7 @@ inp = File.open(inName, "r+")
 out = File.open(outName, "w")
 
 inp.each do |line|
-  if line[":"] == nil && line[eqName] 
+  if line[":"] == nil && line[eqName]
     # add ':'
     newline = line[0..(line.index(eqName[0]) - 1)] + ":" + line[(line.index(eqName[0]) - 1)..-1]
     # remove (...)
@@ -309,7 +309,7 @@ posVar = []
 # do this
 inp.each do |line|
   posVar[countIn] = line.index(varChar)
-  countIn += 1 
+  countIn += 1
 end
 
 # *sigh* Filehandling...
@@ -327,12 +327,6 @@ out = File.open(outName, "w")
 #ifCounter
 ifCounter = 1
 
-# return? - not activated
-#printf "4: Would you like to output only the first found solution? (y,n) "
-answerReturn = "n"
-#answerReturn = gets.chomp
-i = 1
-
 # Dodo - ifElser (works?)
 inp.each do |line|
   if countIn == 1
@@ -348,21 +342,14 @@ inp.each do |line|
     countOut += 1
   elsif posVar[countIn] < posVar[(countIn - 1)]
     # NOT WORKING
-    difference = posVar[(countIn - 1)] - posVar[countIn] 
+    difference = posVar[(countIn - 1)] - posVar[countIn]
     countToEnd = difference/3
-    if countToEnd > 1
-      countToEnd += 1
-    end
     for i in 1..countToEnd
       out.puts("end")
+      ifCounter -= 1
     end
     out.puts("elseif " + line)
     # NOT WORKING
-  end
-  # returns
-  if line[eqName] && answerReturn == "y" 
-    out.puts ("return")
-    countOut += 1
   end
   countIn += 1
 end
@@ -436,24 +423,24 @@ vars = vars.uniq
 if vars.length == 0
   puts "5: no Variables found!"
 else
-  puts "5: " + vars.length.to_s + " Variable(s) found!" 
+  puts "5: " + vars.length.to_s + " Variable(s) found!"
 end
 
 # Set name of your function for matlab
 printf "5: Please enter your desired functionName for Matlab (e.g. myfun): "
 
-# Generate file for function 
+# Generate file for function
 functionName = gets.chomp
-outName = functionName + ".m" 
+outName = functionName + ".m"
 out = File.open(outName, "w")
 
 # print to file
 # first line
 out.printf "function [f] = " + functionName + "("
-for i in 0..(vars.length - 1) 
+for i in 0..(vars.length - 1)
   out.printf vars[i]
   if i < vars.length - 1
-    out.printf ","  
+    out.printf ","
   end
 end
 out.printf ")"
@@ -465,7 +452,7 @@ for i in 0..(vars.length - 1)
   countOut += 1
 end
 # Call equations and deliver output
-out.puts(inName[0..(inName.index(".")-1)] + ";") 
+out.puts(inName[0..(inName.index(".")-1)] + ";")
 countOut += 1
 out.puts(calcFile[0..(calcFile.index(".") - 1)])
 countOut += 1
@@ -495,6 +482,6 @@ if answer == "y"
 end
 
 # Finish
-runtime = Time.now - startTime 
+runtime = Time.now - startTime
 puts "Parsor runtime was: " + runtime.to_s + " Seconds"
 puts "Parsing finished, returning to previous state..."
