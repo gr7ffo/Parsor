@@ -14,7 +14,7 @@ ____
 | |_) / _` | '__/ __|/ _ \| '__|
 |  __/ (_| | |  \__ \ (_) | |
 |_|   \__,_|_|  |___/\___/|_|
-                            v0.3.1
+                              v0.4
 written by Christopher Sauer, 2014
 EOF
 
@@ -259,7 +259,7 @@ puts "4: Handling the if and elseif operators"
 # Inputfile
 inName = "out3.txt"
 
-# Outputfile - deactivated
+# Outputfile - not activated
 #printf "4: Please enter the desired Name for my main output (e.g. out.m): "
 #outName = gets.chomp
 outName = "out.m"
@@ -545,7 +545,7 @@ if answerMagic == "y"
   inp.close
   out.close
 
-  # Remove myfun.m and out.m - deactivaed
+  # Remove myfun.m and out.m - not activated
   #printf "6: Should not-needed Files, like " + functionName + ".m or " + inName + " be deleted? (y,n) "
   #answerDelete = gets.chomp
   answerDelete = "y"
