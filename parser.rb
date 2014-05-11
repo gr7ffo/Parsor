@@ -179,6 +179,7 @@ end
 # equation found? (optional)
 #puts "Equation found on line " + sav[0].to_s
 
+# cut Equations from out1.txt, leads to out2.txt
 # But first let me (take) save a (sel)fi(l)e
 inp.close
 outName = "out2.txt"
