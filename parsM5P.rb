@@ -302,7 +302,7 @@ if $choiceMade
     out = File.open(outName, "w")
 
     #ifCounter
-    ifCounter = 1
+    ifCounter = 0
 
     # Dodo - ifElser (works?)
     inp.each do |line|
@@ -330,7 +330,7 @@ if $choiceMade
     end
 
     # ending all ifs (hope)
-    for i in 2..ifCounter
+    for i in 1..ifCounter
         out.puts("end")
         countOut += 1
     end

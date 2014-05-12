@@ -246,7 +246,7 @@ if $choiceMade
     out = File.open(outName, "w")
 
     #ifCounter
-    ifCounter = 1
+    ifCounter = 0
 
     # reset eqNum
     eqNum = 1
@@ -278,4 +278,210 @@ if $choiceMade
 
     # Generating output
     puts "4: Outputfile " + outName + " and " + countOut.to_s + " lines written"
+
+    # Needed later for functionfile generation
+    calcFile = outName
+
+    # genMatFun
+    #==========================================================================
+
+    # Files ready for Work
+    # equations.m <= parsEquation
+    # out1.txt <= preParser
+    # out2.txt <= []remover
+    # out3.txt <= parsEquation
+    # out.m <= generated from ifElser
+    # varChar-variable for scanning for Variables
+    puts "5: Generating matlab functions"
+
+    # Files
+    inName = "equations.m"
+
+    # Generate and open Files
+    inp = File.open(inName, "r+")
+
+    # reset Linecounter
+    countIn = 1
+    countOut = 1
+
+    # Variable Array for your variables
+    vars = []
+    nVars = 0;
+
+    # Infos for the user
+    puts "5: Starting variable search"
+
+    # Dododo
+    inp.each do |line|
+        lineFromX = line
+        while lineFromX[varChar]
+            # Where is the Variable?
+            pos = lineFromX.index(varChar)
+            # the first cut is the deepest...
+            lineFromX = lineFromX[pos..-1]
+            # Search for next blank
+            posBlank = lineFromX.index(" ")
+            # Save Variables
+            vars[nVars] = lineFromX[0..posBlank]
+            nVars += 1
+            # the second cut
+            lineFromX = lineFromX[posBlank..-1]
+        end
+    end
+
+    # Remove duplicate variables
+    vars = vars.uniq
+    if vars.length == 0
+        puts "5: no Variables found!"
+    else
+        puts "5: " + vars.length.to_s + " Variable(s) found!"
+    end
+
+    # Set name of your function for matlab
+    printf "5: Please enter your desired functionName for Matlab (e.g. myfun): "
+
+    # Generate file for function
+    functionName = gets.chomp
+    outName = functionName + ".m"
+    out = File.open(outName, "w")
+
+    # print to file
+    # first line
+    out.printf "function [f] = " + functionName + "("
+    for i in 0..(vars.length - 1)
+        out.printf vars[i]
+        if i < vars.length - 1
+            out.printf ","
+        end
+    end
+    out.printf ")"
+    out.printf "\n"
+    countOut += 1
+    # varDef
+    for i in 0..(vars.length - 1)
+        out.puts vars[i] + " = " + vars[i] + ";"
+        countOut += 1
+    end
+    # Call equations and deliver output
+    out.puts(inName[0..(inName.index(".")-1)] + ";")
+    countOut += 1
+    out.puts(calcFile[0..(calcFile.index(".") - 1)])
+    countOut += 1
+    # endfunction
+    out.puts("end")
+    countOut += 1
+
+    # *sigh* Filehandling...
+    inp.close
+    out.close
+
+    # Generating output
+    puts "5: Functionfile " + outName + " and " + countOut.to_s + " lines written"
+
+    # Information for the user
+    puts "5: Now use your generated Functionfile " + outName + " for simple Matlab Execution without variable handling for Matlab"
+
+    # Ask if unused files should be deleted
+    print "5: Should unused files be deleted? (y,n) "
+    answer = gets.chomp
+
+    if answer == "y"
+        # Removing unused files
+        File.delete("out1.txt")
+        File.delete("out2.txt")
+        File.delete("out3.txt")
+    end
+
+    # newout
+    #==========================================================================
+
+    # equations.m
+    # out.m - merge?
+    # myfun.m - merge?
+    # optional implementation for matlab use of e.g. not your functionfile out.m
+    printf "6: Do you want to use your solution as a variable in matlab? (y,n) "
+    answerMagic = gets.chomp
+
+    # testing
+    if answerMagic == "y"
+        puts "6: Generating new files..."
+        # Files
+        inName = calcFile
+        outName = "new" + calcFile
+        equationsName = "equations.m"
+
+        # reset Linecounter
+        countIn = 1
+        countOut = 1
+
+        # Launching Files
+        inp = File.open(inName, "r+")
+        out = File.open(outName, "w")
+
+        # test new function
+        out.printf "function [f] = " + outName[0..-3] + "("
+        for i in 0..(vars.length - 1)
+            out.printf vars[i]
+            if i < vars.length - 1
+                out.printf ","
+            end
+        end
+        out.printf ")"
+        out.printf "\n"
+        countOut += 1
+
+        # varDef
+        for i in 0..(vars.length - 1)
+            out.puts vars[i] + " = " + vars[i] + ";"
+            countOut += 1
+        end
+
+        # Call equations and deliver output
+        out.puts(equationsName[0..(equationsName.index(".")-1)] + ";")
+        countOut += 1
+
+        # newline
+        out.puts("% This line is intentionally there")
+
+        # write out + set f
+        inp.each do |line|
+            if line[eqName]
+                out.puts(line[0..(line.index(eqName) - 1)] + "f = " + line[line.index(eqName)..-2] + ";" + "\n")
+                countOut += 1
+            else
+                out.puts(line)
+                countOut += 1
+            end
+            countIn += 1
+        end
+
+        # endfunction
+        out.puts("end")
+        countOut += 1
+
+        # *sigh* Filehandling...
+        inp.close
+        out.close
+
+        # Remove myfun.m and out.m - not activated
+        #printf "6: Should not-needed Files, like " + functionName + ".m or " + inName + " be deleted? (y,n) "
+        #answerDelete = gets.chomp
+        answerDelete = "y"
+
+        if answerDelete == "y"
+            File.delete(functionName + ".m")
+            File.delete(inName)
+        end
+
+        # Generating output
+        puts "6: Outputfile " + outName + " and " + countOut.to_s + " lines written"
+
+        # Info
+        puts "6: You can now use " + outName + " as a function for direct matlab use of your values"
+    end
+
+    # Finish
+    runtime = Time.now - startTime
+    puts "Parsor runtime was: " + runtime.to_s + " Seconds"
+    puts "Parsing finished, returning to previous state..."
 end
