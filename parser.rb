@@ -8,7 +8,8 @@
 # should run if ruby >= 2.0.0
 
 # see github for more details, issues, pull requests
-# TODO: insert link here
+# https://github.com/Balagrio/Parsor - if not found => private Repository
+# better mail me: christopher.sauer@fau.de
 
 #logo
 $logo = <<EOF
@@ -34,7 +35,7 @@ puts "0: Executing Parsor"
 $choiceMade = false
 
 # Selection Menu
-puts "0: Select your Type"
+puts "0: Which type do you want me to parse?"
 puts "(1) - LinReg"
 puts "(2) - M5P"
 puts "(3) - M5Rules"

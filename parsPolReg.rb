@@ -222,4 +222,9 @@ if $choiceMade
         # Removing unused files
         File.delete("out1.txt")
     end
+
+    # Finish
+    runtime = Time.now - startTime
+    puts "Parsor runtime was: " + runtime.to_s + " Seconds"
+    puts "Parsing finished, returning to previous state..."
 end
