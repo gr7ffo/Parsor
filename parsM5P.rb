@@ -67,6 +67,7 @@ if $choiceMade
     # Close files
     inp.close
     out.close
+    
     # Generate output
     puts "1: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
