@@ -221,4 +221,61 @@ if $choiceMade
 
     # Generating Output
     puts "3: Outputfile " + outName + " and " + countOut.to_s + " lines written"
+
+
+    # ifElser (THE Brain)
+    #==========================================================================
+
+    # Files ready for Work
+    # equations.m <= parsEquation
+    # out1.txt <= preParser
+    # out2.txt <= []remover
+    # out3.txt <= parsEquation
+    puts "4: Handling the if and elseif operators"
+
+    # files
+    inName = "out3.txt"
+    outName = "out.m"
+
+    # reset Linecounter
+    countIn = 1
+    countOut = 1
+
+    # Generate and open Files
+    inp = File.open(inName, "r+")
+    out = File.open(outName, "w")
+
+    #ifCounter
+    ifCounter = 1
+
+    # reset eqNum
+    eqNum = 1
+
+    # Dodo - ifElser (works?)
+    inp.each do |line|
+        if line[varChar]
+            out.puts ("if " + line)
+            ifCounter += 1
+            countOut += 1
+        elsif line.length == 1 && countIn > 1
+            out.puts (eqName + eqNum.to_s)
+            eqNum += 1
+            countOut += 1
+            for i in 1..ifCounter
+                out.puts("end")
+                ifCounter -= 1
+                countOut += 1
+            end
+            out.puts(" ")
+            countOut += 1
+        end
+        countIn += 1
+    end
+
+    # *sigh* Filehandling...
+    inp.close
+    out.close
+
+    # Generating output
+    puts "4: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 end
