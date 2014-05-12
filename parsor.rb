@@ -22,12 +22,6 @@ v0.6
 written by Christopher Sauer, 2014
 EOF
 
-# require all scripts
-require_relative 'parsLinReg'
-require_relative 'parsM5P'
-require_relative 'parsM5Rules'
-require_relative 'parsPolReg'
-
 # Welcome
 puts $logo
 puts ""
