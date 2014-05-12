@@ -125,7 +125,7 @@ if $choiceMade
     # out1.txt <= preParser
 
     # varChar-variable for scanning for Variables
-    puts "3: Generating matlab functions"
+    puts "3: Generating matlab function"
 
     # Files
     inName = "equation.m"
@@ -212,7 +212,7 @@ if $choiceMade
     puts "3: Functionfile " + outName + " and " + countOut.to_s + " lines written"
 
     # Information for the user
-    puts "3: Now use your generated Functionfile " + outName + " for simple Matlab Execution without variable handling for Matlab"
+    puts "3: Now use your generated Functionfile " + outName + " for simple Matlab Execution with variable handling for Matlab"
 
     # Ask if unused files should be deleted
     print "3: Should unused files be deleted? (y,n) "
@@ -221,6 +221,5 @@ if $choiceMade
     if answer == "y"
         # Removing unused files
         File.delete("out1.txt")
-        File.delete("out2.txt")
     end
 end
