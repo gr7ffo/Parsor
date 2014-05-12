@@ -53,4 +53,6 @@ elsif selectionVal == 3
     load "parsM5Rules.rb"
 elsif selectionVal == 4
     load "parsPolReg.rb"
+elsif selectionVal == 666
+    puts "The Number of the Beast!"
 end
