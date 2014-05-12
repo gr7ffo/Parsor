@@ -67,6 +67,7 @@ if $choiceMade
     # Close files
     inp.close
     out.close
+
     # Generate output
     puts "1: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
@@ -197,7 +198,7 @@ if $choiceMade
     # out1.txt <= preParser
     # out2.txt <= ()remover
 
-    # add ':'
+    # file handling
     inName = "out2.txt"
     outName = "out3.txt"
 
@@ -301,7 +302,7 @@ if $choiceMade
     out = File.open(outName, "w")
 
     #ifCounter
-    ifCounter = 1
+    ifCounter = 0
 
     # Dodo - ifElser (works?)
     inp.each do |line|
@@ -329,7 +330,7 @@ if $choiceMade
     end
 
     # ending all ifs (hope)
-    for i in 2..ifCounter
+    for i in 1..ifCounter
         out.puts("end")
         countOut += 1
     end
