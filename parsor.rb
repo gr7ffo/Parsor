@@ -18,7 +18,7 @@ ____
 | |_) / _` | '__/ __|/ _ \| '__|
 |  __/ (_| | |  \__ \ (_) | |
 |_|   \__,_|_|  |___/\___/|_|
-v0.6
+                              v0.6
 written by Christopher Sauer, 2014
 EOF
 
@@ -40,6 +40,9 @@ printf "0: "
 selectionVal = gets.chomp.to_i
 $choiceMade = true
 
+# Programm running for Linear Regression
+#==========================================================================
+#==========================================================================
 if selectionVal == 1
     # pars LinReg by Christopher Sauer, 2014
 
@@ -271,6 +274,9 @@ if selectionVal == 1
         puts "Parsor runtime was: " + runtime.to_s + " Seconds"
         puts "Parsing finished, returning to previous state..."
     end
+# Programm running for M5P-Tree
+#==========================================================================
+#==========================================================================
 elsif selectionVal == 2
     # pars M5P by Christopher Sauer, 2014
 
@@ -824,6 +830,9 @@ elsif selectionVal == 2
         puts "Parsor runtime was: " + runtime.to_s + " Seconds"
         puts "Parsing finished, returning to previous state..."
     end
+# Programm running for M5Rules
+#==========================================================================
+#==========================================================================
 elsif selectionVal == 3
     # pars M5Rules by Christopher Sauer, 2014
 
@@ -1312,6 +1321,9 @@ elsif selectionVal == 3
         puts "Parsor runtime was: " + runtime.to_s + " Seconds"
         puts "Parsing finished, returning to previous state..."
     end
+# Programm running for Polynom Regression
+#==========================================================================
+#==========================================================================
 elsif selectionVal == 4
     # pars PolReg by Christopher Sauer, 2014
 
@@ -1543,6 +1555,8 @@ elsif selectionVal == 4
         puts "Parsor runtime was: " + runtime.to_s + " Seconds"
         puts "Parsing finished, returning to previous state..."
     end
+#==========================================================================
+#==========================================================================
 elsif selectionVal == 666
     puts "The Number of the Beast!"
 end
