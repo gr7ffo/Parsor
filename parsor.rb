@@ -961,6 +961,7 @@ elsif selectionVal == 3
 
         # Equationterm
         eqName = "Rule"
+        eqNameFound = 1
 
         # Filenames input
         inName = "out2.txt"
@@ -1042,7 +1043,7 @@ elsif selectionVal == 3
             elsif line["THEN"]
                 # do nothing
             elsif line["Rule"]
-                # do nothing
+                eqNameFound += 1
             else
                 # put line, only if there is logic
                 out.puts(line)
@@ -1094,7 +1095,11 @@ elsif selectionVal == 3
                 ifCounter += 1
                 countOut += 1
             elsif line.length == 1 && countIn > 1
-                out.puts (eqName + eqNum.to_s)
+                # count the number of Rules found
+                if eqNameFound > 1
+                    out.puts (eqName + eqNum.to_s)
+                    eqNameFound -= 1
+                end
                 eqNum += 1
                 countOut += 1
                 for i in 1..ifCounter
@@ -1243,7 +1248,7 @@ elsif selectionVal == 3
             puts "6: Generating new files..."
             # Files
             inName = calcFile
-            outName = "new" + calcFile
+            outName = "new" + functionName + ".m"
             equationsName = "M5Requations.m"
 
             # reset Linecounter
