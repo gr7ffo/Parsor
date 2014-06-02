@@ -18,7 +18,7 @@ ____
 | |_) / _` | '__/ __|/ _ \| '__|
 |  __/ (_| | |  \__ \ (_) | |
 |_|   \__,_|_|  |___/\___/|_|
-                              v0.6
+                              v0.7
 written by Christopher Sauer, 2014
 EOF
 
@@ -129,7 +129,7 @@ if selectionVal == 1
 
         # Filenames input
         inName = "out1.txt"
-        eqsName = "equation.m"
+        eqsName = "LRequation.m"
 
         # Files
         inp = File.open(inName, "r+")
@@ -167,14 +167,14 @@ if selectionVal == 1
         #==========================================================================
 
         # Files ready for Work
-        # equation.m <= parsEquation, genMatFun
+        # LRequation.m <= parsEquation, genMatFun
         # out1.txt <= preParser
 
         # varChar-variable for scanning for Variables
         puts "3: Generating matlab function"
 
         # Files
-        inName = "equation.m"
+        inName = "LRequation.m"
 
         # Generate and open Files
         inp = File.open(inName, "r+")
@@ -371,7 +371,7 @@ elsif selectionVal == 2
 
         # Filenames input
         inName = "out1.txt"
-        eqsName = "equations.m"
+        eqsName = "M5Pequations.m"
 
         # Files
         inp = File.open(inName, "r+")
@@ -474,7 +474,7 @@ elsif selectionVal == 2
         puts "3: Removing (...)"
 
         # Files ready for Work
-        # equations.m <= parsEquation
+        # M5Pequations.m <= parsEquation
         # out1.txt <= preParser
         # out2.txt <= ()remover
 
@@ -513,7 +513,7 @@ elsif selectionVal == 2
         #==========================================================================
 
         # Files ready for Work
-        # equations.m <= parsEquation
+        # M5Pequations.m <= parsEquation
         # out1.txt <= preParser
         # out2.txt <= ()remover
         # out3.txt <= ifElser
@@ -630,7 +630,7 @@ elsif selectionVal == 2
         #==========================================================================
 
         # Files ready for Work
-        # equations.m <= parsEquation, genMatFun
+        # M5Pequations.m <= parsEquation, genMatFun
         # out1.txt <= preParser
         # out2.txt <= ()remover
         # out3.txt <= ifElser
@@ -639,7 +639,7 @@ elsif selectionVal == 2
         puts "5: Generating matlab functions"
 
         # Files
-        inName = "equations.m"
+        inName = "M5Pequations.m"
 
         # Generate and open Files
         inp = File.open(inName, "r+")
@@ -740,7 +740,7 @@ elsif selectionVal == 2
         # newout
         #==========================================================================
 
-        # equations.m
+        # M5Pequations.m
         # out.m - merge?
         # myfun.m - merge?
         # optional implementation for matlab use of e.g. not your functionfile out.m
@@ -752,8 +752,8 @@ elsif selectionVal == 2
             puts "6: Generating new files..."
             # Files
             inName = calcFile
-            outName = "new" + calcFile
-            equationsName = "equations.m"
+            outName = functionName + ".m"
+            equationsName = "M5Pequations.m"
 
             # reset Linecounter
             countIn = 1
@@ -814,7 +814,7 @@ elsif selectionVal == 2
             answerDelete = "y"
 
             if answerDelete == "y"
-                File.delete(functionName + ".m")
+                #File.delete(functionName + ".m")
                 File.delete(inName)
             end
 
@@ -961,10 +961,11 @@ elsif selectionVal == 3
 
         # Equationterm
         eqName = "Rule"
+        eqNameFound = 1
 
         # Filenames input
         inName = "out2.txt"
-        eqsName = "equations.m"
+        eqsName = "M5Requations.m"
 
         # Files
         inp = File.open(inName, "r+")
@@ -1042,7 +1043,7 @@ elsif selectionVal == 3
             elsif line["THEN"]
                 # do nothing
             elsif line["Rule"]
-                # do nothing
+                eqNameFound += 1
             else
                 # put line, only if there is logic
                 out.puts(line)
@@ -1063,7 +1064,7 @@ elsif selectionVal == 3
         #==========================================================================
 
         # Files ready for Work
-        # equations.m <= parsEquation
+        # M5Requations.m <= parsEquation
         # out1.txt <= preParser
         # out2.txt <= []remover
         # out3.txt <= parsEquation
@@ -1094,7 +1095,11 @@ elsif selectionVal == 3
                 ifCounter += 1
                 countOut += 1
             elsif line.length == 1 && countIn > 1
-                out.puts (eqName + eqNum.to_s)
+                # count the number of Rules found
+                if eqNameFound > 1
+                    out.puts (eqName + eqNum.to_s)
+                    eqNameFound -= 1
+                end
                 eqNum += 1
                 countOut += 1
                 for i in 1..ifCounter
@@ -1122,7 +1127,7 @@ elsif selectionVal == 3
         #==========================================================================
 
         # Files ready for Work
-        # equations.m <= parsEquation
+        # M5Requations.m <= parsEquation
         # out1.txt <= preParser
         # out2.txt <= []remover
         # out3.txt <= parsEquation
@@ -1131,7 +1136,7 @@ elsif selectionVal == 3
         puts "5: Generating matlab functions"
 
         # Files
-        inName = "equations.m"
+        inName = "M5Requations.m"
 
         # Generate and open Files
         inp = File.open(inName, "r+")
@@ -1231,7 +1236,7 @@ elsif selectionVal == 3
         # newout
         #==========================================================================
 
-        # equations.m
+        # M5Requations.m
         # out.m - merge?
         # myfun.m - merge?
         # optional implementation for matlab use of e.g. not your functionfile out.m
@@ -1243,8 +1248,8 @@ elsif selectionVal == 3
             puts "6: Generating new files..."
             # Files
             inName = calcFile
-            outName = "new" + calcFile
-            equationsName = "equations.m"
+            outName = "new" + functionName + ".m"
+            equationsName = "M5Requations.m"
 
             # reset Linecounter
             countIn = 1
@@ -1410,7 +1415,7 @@ elsif selectionVal == 4
 
         # Filenames input
         inName = "out1.txt"
-        eqsName = "equation.m"
+        eqsName = "PRequation.m"
 
         # Files
         inp = File.open(inName, "r+")
@@ -1448,14 +1453,14 @@ elsif selectionVal == 4
         #==========================================================================
 
         # Files ready for Work
-        # equation.m <= parsEquation, genMatFun
+        # PRequation.m <= parsEquation, genMatFun
         # out1.txt <= preParser
 
         # varChar-variable for scanning for Variables
         puts "3: Generating matlab function"
 
         # Files
-        inName = "equation.m"
+        inName = "PRequation.m"
 
         # Generate and open Files
         inp = File.open(inName, "r+")
