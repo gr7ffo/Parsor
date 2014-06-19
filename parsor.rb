@@ -1474,19 +1474,12 @@ elsif selectionVal == 4
 
         # print to file
         # first line
-        out.printf "function [" + eqName +"] = " + functionName + "("
-        for i in 0..(vars.length - 1)
-            out.printf vars[i]
-            if i < vars.length - 1
-                out.printf ","
-            end
-        end
-        out.printf ")"
-        out.printf "\n"
+        out.puts "function [" + eqName +"] = " + functionName + "(x)"
         countOut += 1
+        
         # varDef
         for i in 0..(vars.length - 1)
-            out.puts vars[i] + " = " + vars[i] + ";"
+            out.puts vars[i] + " = x(" + (i + 1).to_s + ");"
             countOut += 1
         end
         # insert equation
