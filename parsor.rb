@@ -1164,19 +1164,11 @@ elsif selectionVal == 3
 
         # print to file
         # first line
-        out.printf "function [f] = " + functionName + "("
-        for i in 0..(vars.length - 1)
-            out.printf vars[i]
-            if i < vars.length - 1
-                out.printf ","
-            end
-        end
-        out.printf ")"
-        out.printf "\n"
+        out.puts "function [f] = " + functionName + "(x)"
         countOut += 1
         # varDef
         for i in 0..(vars.length - 1)
-            out.puts vars[i] + " = " + vars[i] + ";"
+            out.puts vars[i] + " = x(" + (i + 1).to_s + ");"
             countOut += 1
         end
         # Call equations and deliver output
@@ -1236,20 +1228,12 @@ elsif selectionVal == 3
             out = File.open(outName, "w")
 
             # test new function
-            out.printf "function [f] = " + outName[0..-3] + "("
-            for i in 0..(vars.length - 1)
-                out.printf vars[i]
-                if i < vars.length - 1
-                    out.printf ","
-                end
-            end
-            out.printf ")"
-            out.printf "\n"
+            out.puts "function [f] = " + outName[0..-3] + "(x)"
             countOut += 1
 
             # varDef
             for i in 0..(vars.length - 1)
-                out.puts vars[i] + " = " + vars[i] + ";"
+                out.puts vars[i] + " = x(" + (i + 1).to_s + ");"
                 countOut += 1
             end
 
