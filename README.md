@@ -1,10 +1,10 @@
-# Parsor                                
-<<<<<<< HEAD
-A Parser, written in Ruby
-Purpose: Parsing Rapidminer output to Matlab
-=======
+____
+|  _ \ __ _ _ __ ___  ___  _ __
+| |_) / _` | '__/ __|/ _ \| '__|
+|  __/ (_| | |  \__ \ (_) | |
+|_|   \__,_|_|  |___/\___/|_|
+
 A Parser, written in Ruby. Its purpose is creating Matlabfunctions from Rapidminer results.
->>>>>>> master
 
 ## tested and working on
 * ruby 2.1.1p76 (2014-02-24 revision 45161) [x86_64-darwin13.0]
