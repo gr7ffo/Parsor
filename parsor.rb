@@ -235,6 +235,7 @@ if selectionVal == 1
             out.puts vars[i] + " = x(" + (i + 1).to_s + ");"
             countOut += 1
         end
+
         # insert equation
         out.puts(equationString)
 
@@ -428,7 +429,7 @@ elsif selectionVal == 2
         #puts "Equation found on line " + sav[0].to_s
 
         # cut Equations from out1.txt, leads to out2.txt
-        # But first let me (take) save a (sel)fi(l)e
+        # But first let me save files
         inp.close
         outName = "out2.txt"
         inp = File.open(inName, "r+")
@@ -983,7 +984,7 @@ elsif selectionVal == 3
         puts "3: " + eqNum.to_s + " Equation(s) written to " + eqsName
 
         # cut file to logic from out2.txt, leads to out3.txt
-        # But first let me (take) save a (sel)fi(l)e
+        # But first let me save files
         inp.close
         outName = "out3.txt"
         inp = File.open(inName, "r+")
