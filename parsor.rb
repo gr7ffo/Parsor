@@ -11,6 +11,12 @@
 # https://github.com/Balagrio/Parsor - if not found => private Repository
 # better mail me: christopher.sauer@fau.de
 
+# Important stops in file
+# line ca. 45--264 Linear Regression
+# line ca. 265--799 M5P-Tree
+# line ca. 800--1278 M5-Rules
+# line ca. 1279--1499 Polynomial Regression
+
 #logo
 $logo = <<EOF
 ____
@@ -18,7 +24,7 @@ ____
 | |_) / _` | '__/ __|/ _ \| '__|
 |  __/ (_| | |  \__ \ (_) | |
 |_|   \__,_|_|  |___/\___/|_|
-                              v0.8
+                             v0.8b
 written by Christopher Sauer, 2014
 EOF
 
@@ -60,12 +66,6 @@ if selectionVal == 1
         printf "1: Enter Filename: "
         fileName = gets.chomp
         outName = "out1.txt"
-
-        # This is my Parser!
-        if fileName == "Fluch der Karibik" || fileName == "Pirates of the Caribbean"
-            puts "Arrrrrrr I am a Pirate!"
-            exit
-        end
 
         # Opening File, catch possible Errors
         begin
@@ -285,12 +285,6 @@ elsif selectionVal == 2
         printf "1: Enter Filename: "
         fileName = gets.chomp
         outName = "out1.txt"
-
-        # This is my Parser!
-        if fileName == "Fluch der Karibik" || fileName == "Pirates of the Caribbean"
-            puts "Arrrrrrr I am a Pirate!"
-            exit
-        end
 
         # Opening File, catch possible Errors
         begin
@@ -728,8 +722,8 @@ elsif selectionVal == 2
         # out.m - merge?
         # myfun.m - merge?
         # optional implementation for matlab use of e.g. not your functionfile out.m
-        printf "6: Do you want to use your solution as a variable in matlab? (y,n) "
-        answerMagic = gets.chomp
+        #printf "6: Do you want to use your solution as a variable in matlab? (y,n) "
+        answerMagic = "y"
 
         # testing
         if answerMagic == "y"
@@ -826,12 +820,6 @@ elsif selectionVal == 3
         printf "1: Enter Filename: "
         fileName = gets.chomp
         outName = "out1.txt"
-
-        # This is my Parser!
-        if fileName == "Fluch der Karibik" || fileName == "Pirates of the Caribbean"
-            puts "Arrrrrrr I am a Pirate!"
-            exit
-        end
 
         # Opening File, catch possible Errors
         begin
@@ -1172,7 +1160,7 @@ elsif selectionVal == 3
             countOut += 1
         end
         # Call equations and deliver output
-        out.puts(inName[0..(inName.index(".")-1)] + ";")
+        out.puts(inName[0..(inName.index(".") - 1)] + ";")
         countOut += 1
         out.puts(calcFile[0..(calcFile.index(".") - 1)])
         countOut += 1
@@ -1208,15 +1196,16 @@ elsif selectionVal == 3
         # out.m - merge?
         # myfun.m - merge?
         # optional implementation for matlab use of e.g. not your functionfile out.m
-        printf "6: Do you want to use your solution as a variable in matlab? (y,n) "
-        answerMagic = gets.chomp
+
+        #printf "6: Do you want to use your solution as a variable in matlab? (y,n) "
+        answerMagic = "y"
 
         # testing
         if answerMagic == "y"
             puts "6: Generating new files..."
             # Files
             inName = calcFile
-            outName = "new" + functionName + ".m"
+            outName = functionName + ".m"
             equationsName = "M5Requations.m"
 
             # reset Linecounter
@@ -1247,8 +1236,12 @@ elsif selectionVal == 3
             # write out + set f
             inp.each do |line|
                 if line[eqName]
-                    out.puts(line[0..(line.index(eqName) - 1)] + "f = " + line[line.index(eqName)..-2] + ";" + "\n")
-                    countOut += 1
+                    # Writes RuleX in line for console out
+                    #out.printf(line[0..(line.index(eqName) - 1)])
+                    # Writes f = RuleX for matlab input BETTER
+                    out.printf("f = " + line[line.index(eqName)..-2] + ";" + "\n")
+                    out.puts("break")
+                    countOut += 2
                 else
                     out.puts(line)
                     countOut += 1
@@ -1270,7 +1263,8 @@ elsif selectionVal == 3
             answerDelete = "y"
 
             if answerDelete == "y"
-                File.delete(functionName + ".m")
+                #overwrite files
+                #File.delete(functionName + ".m")
                 File.delete(inName)
             end
 
@@ -1306,12 +1300,6 @@ elsif selectionVal == 4
         printf "1: Enter Filename: "
         fileName = gets.chomp
         outName = "out1.txt"
-
-        # This is my Parser!
-        if fileName == "Fluch der Karibik" || fileName == "Pirates of the Caribbean"
-            puts "Arrrrrrr I am a Pirate!"
-            exit
-        end
 
         # Opening File, catch possible Errors
         begin
@@ -1476,7 +1464,7 @@ elsif selectionVal == 4
         # first line
         out.puts "function [" + eqName +"] = " + functionName + "(x)"
         countOut += 1
-        
+
         # varDef
         for i in 0..(vars.length - 1)
             out.puts vars[i] + " = x(" + (i + 1).to_s + ");"
