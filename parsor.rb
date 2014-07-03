@@ -764,6 +764,7 @@ elsif selectionVal == 2
             # write equations in function file
             eqFile.each do |line|
                 out.puts(line)
+                countOut += 1
             end
 
             # separation line
@@ -788,6 +789,7 @@ elsif selectionVal == 2
             # *sigh* Filehandling...
             inp.close
             out.close
+            eqFile.close
 
             # Remove myfun.m and out.m - not activated
             #printf "6: Should not-needed Files, like " + functionName + ".m or " + inName + " be deleted? (y,n) "
@@ -1227,6 +1229,7 @@ elsif selectionVal == 3
             # Launching Files
             inp = File.open(inName, "r+")
             out = File.open(outName, "w")
+            eqFile = File.open(equationsName, "r+")
 
             # test new function
             out.puts "function [f] = " + outName[0..-3] + "(x)"
@@ -1243,7 +1246,16 @@ elsif selectionVal == 3
             countOut += 1
 
             # newline
-            out.puts("% This line is intentionally there")
+            out.puts("% Equations")
+
+            # Write equations to file
+            eqFile.each do |line|
+                out.puts(line)
+                countOut += 1
+            end
+
+            # logic
+            out.puts("% Logic")
 
             # write out + set f
             inp.each do |line|
@@ -1269,6 +1281,7 @@ elsif selectionVal == 3
             # *sigh* Filehandling...
             inp.close
             out.close
+            eqFile.close
 
             # Remove myfun.m and out.m - not activated
             #printf "6: Should not-needed Files, like " + functionName + ".m or " + inName + " be deleted? (y,n) "
@@ -1279,6 +1292,7 @@ elsif selectionVal == 3
                 #overwrite files
                 #File.delete(functionName + ".m")
                 File.delete(inName)
+                File.delete(equationsName)
             end
 
             # Generating output
