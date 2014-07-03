@@ -140,11 +140,10 @@ if selectionVal == 1
 
         # write first line
         equationString = eqName + " = "
-        eqs.printf(equationString)
 
         # Do for each line
         inp.each do |line|
-            equationString << (line[0..-3] + " ")
+            equationString << (line[0..-2] + " ")
             countIn += 1
         end
 
@@ -1402,16 +1401,18 @@ elsif selectionVal == 4
 
         # write first line
         equationString = eqName + " = "
-        eqs.printf(equationString)
 
         # Do for each line
         inp.each do |line|
-            equationString << (line[0..-3] + " ")
+            equationString << (line[0..-2] + " ")
             countIn += 1
         end
 
         # silence output
         equationString << ";"
+
+        # remove \n
+        equationString.gsub! ("\n")
 
         # write in output
         eqs.puts(equationString)
