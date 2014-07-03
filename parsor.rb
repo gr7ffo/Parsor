@@ -1241,7 +1241,8 @@ elsif selectionVal == 3
                     #out.printf(line[0..(line.index(eqName) - 1)])
                     # Writes f = RuleX for matlab input BETTER
                     out.printf("f = " + line[line.index(eqName)..-2] + ";" + "\n")
-                    out.puts("break")
+                    # return is better for matlab, break should only be used in for or while loops
+                    out.puts("return")
                     countOut += 2
                 else
                     out.puts(line)
