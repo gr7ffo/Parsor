@@ -228,7 +228,7 @@ if selectionVal == 1
 
         # print to file
         # first line
-        out.puts "function [" + eqName +"] = " + functionName + "(x)"
+        out.puts "function [" + eqName + "] = " + functionName + "(x)"
         countOut += 1
         # varDef
         for i in 0..(vars.length - 1)
@@ -260,6 +260,7 @@ if selectionVal == 1
         if answer == "y"
             # Removing unused files
             File.delete("out1.txt")
+            File.delete(inName)
         end
 
         # Finish
@@ -1489,7 +1490,7 @@ elsif selectionVal == 4
 
         # print to file
         # first line
-        out.puts "function [" + eqName +"] = " + functionName + "(x)"
+        out.puts "function [" + eqName + "] = " + functionName + "(x)"
         countOut += 1
 
         # varDef
@@ -1521,6 +1522,7 @@ elsif selectionVal == 4
         if answer == "y"
             # Removing unused files
             File.delete("out1.txt")
+            File.delete(inName)
         end
 
         # Finish
