@@ -352,9 +352,10 @@ elsif selectionVal == 2
         searchTermFound = false
         lineSearchTermFound = 0
 
-        # Equationterm
-        printf "2: Enter your modelname (e.g. LM for Linear Model): "
-        eqName = gets.chomp
+        # Equationterm, not necessary
+        #printf "2: Enter your modelname (e.g. LM for Linear Model): "
+        #eqName = gets.chomp
+        eqName = "LM"
 
         # Filenames input
         inName = "out1.txt"
