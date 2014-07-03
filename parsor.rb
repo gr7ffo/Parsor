@@ -742,6 +742,7 @@ elsif selectionVal == 2
             # Launching Files
             inp = File.open(inName, "r+")
             out = File.open(outName, "w")
+            eqFile = File.open(equationsName, "r+")
 
             # test new function
             out.puts "function [f] = " + outName[0..-3] + "(x)"
@@ -754,11 +755,19 @@ elsif selectionVal == 2
             end
 
             # Call equations and deliver output
-            out.puts(equationsName[0..(equationsName.index(".")-1)] + ";")
-            countOut += 1
+            #out.puts(equationsName[0..(equationsName.index(".")-1)] + ";")
+            #countOut += 1
 
-            # newline
-            out.puts("% This line is intentionally there")
+            # separation line
+            out.puts("% Equations")
+
+            # write equations in function file
+            eqFile.each do |line|
+                out.puts(line)
+            end
+
+            # separation line
+            out.puts("% Logic")
 
             # write out + set f
             inp.each do |line|
@@ -788,6 +797,7 @@ elsif selectionVal == 2
             if answerDelete == "y"
                 #File.delete(functionName + ".m")
                 File.delete(inName)
+                File.delete(equationsName)
             end
 
             # Generating output
