@@ -24,7 +24,7 @@ ____
 | |_) / _` | '__/ __|/ _ \| '__|
 |  __/ (_| | |  \__ \ (_) | |
 |_|   \__,_|_|  |___/\___/|_|
-                             v0.8b
+                              v0.9
 written by Christopher Sauer, 2014
 EOF
 
@@ -140,11 +140,10 @@ if selectionVal == 1
 
         # write first line
         equationString = eqName + " = "
-        eqs.printf(equationString)
 
         # Do for each line
         inp.each do |line|
-            equationString << (line[0..-3] + " ")
+            equationString << (line[0..-2] + " ")
             countIn += 1
         end
 
@@ -228,16 +227,16 @@ if selectionVal == 1
 
         # print to file
         # first line
-        out.puts "function [" + eqName +"] = " + functionName + "(x)"
+        out.puts "function [" + eqName + "] = " + functionName + "(x)"
         countOut += 1
         # varDef
         for i in 0..(vars.length - 1)
-            out.puts vars[i] + " = x(" + (i + 1).to_s + ");"
+            out.puts  vars[i].gsub("\r","") + " = x(" + (i + 1).to_s + ");"
             countOut += 1
         end
 
         # insert equation
-        out.puts(equationString)
+        out.puts(equationString.gsub("\r",""))
 
         # endfunction
         out.puts("end")
@@ -260,6 +259,7 @@ if selectionVal == 1
         if answer == "y"
             # Removing unused files
             File.delete("out1.txt")
+            File.delete(inName)
         end
 
         # Finish
@@ -352,9 +352,10 @@ elsif selectionVal == 2
         searchTermFound = false
         lineSearchTermFound = 0
 
-        # Equationterm
-        printf "2: Enter your modelname (e.g. LM for Linear Model): "
-        eqName = gets.chomp
+        # Equationterm, not necessary
+        #printf "2: Enter your modelname (e.g. LM for Linear Model): "
+        #eqName = gets.chomp
+        eqName = "LM"
 
         # Filenames input
         inName = "out1.txt"
@@ -741,6 +742,7 @@ elsif selectionVal == 2
             # Launching Files
             inp = File.open(inName, "r+")
             out = File.open(outName, "w")
+            eqFile = File.open(equationsName, "r+")
 
             # test new function
             out.puts "function [f] = " + outName[0..-3] + "(x)"
@@ -753,11 +755,20 @@ elsif selectionVal == 2
             end
 
             # Call equations and deliver output
-            out.puts(equationsName[0..(equationsName.index(".")-1)] + ";")
-            countOut += 1
+            #out.puts(equationsName[0..(equationsName.index(".")-1)] + ";")
+            #countOut += 1
 
-            # newline
-            out.puts("% This line is intentionally there")
+            # separation line
+            out.puts("% Equations")
+
+            # write equations in function file
+            eqFile.each do |line|
+                out.puts(line)
+                countOut += 1
+            end
+
+            # separation line
+            out.puts("% Logic")
 
             # write out + set f
             inp.each do |line|
@@ -778,6 +789,7 @@ elsif selectionVal == 2
             # *sigh* Filehandling...
             inp.close
             out.close
+            eqFile.close
 
             # Remove myfun.m and out.m - not activated
             #printf "6: Should not-needed Files, like " + functionName + ".m or " + inName + " be deleted? (y,n) "
@@ -787,6 +799,7 @@ elsif selectionVal == 2
             if answerDelete == "y"
                 #File.delete(functionName + ".m")
                 File.delete(inName)
+                File.delete(equationsName)
             end
 
             # Generating output
@@ -1216,6 +1229,7 @@ elsif selectionVal == 3
             # Launching Files
             inp = File.open(inName, "r+")
             out = File.open(outName, "w")
+            eqFile = File.open(equationsName, "r+")
 
             # test new function
             out.puts "function [f] = " + outName[0..-3] + "(x)"
@@ -1232,7 +1246,16 @@ elsif selectionVal == 3
             countOut += 1
 
             # newline
-            out.puts("% This line is intentionally there")
+            out.puts("% Equations")
+
+            # Write equations to file
+            eqFile.each do |line|
+                out.puts(line)
+                countOut += 1
+            end
+
+            # logic
+            out.puts("% Logic")
 
             # write out + set f
             inp.each do |line|
@@ -1258,6 +1281,7 @@ elsif selectionVal == 3
             # *sigh* Filehandling...
             inp.close
             out.close
+            eqFile.close
 
             # Remove myfun.m and out.m - not activated
             #printf "6: Should not-needed Files, like " + functionName + ".m or " + inName + " be deleted? (y,n) "
@@ -1268,6 +1292,7 @@ elsif selectionVal == 3
                 #overwrite files
                 #File.delete(functionName + ".m")
                 File.delete(inName)
+                File.delete(equationsName)
             end
 
             # Generating output
@@ -1376,16 +1401,18 @@ elsif selectionVal == 4
 
         # write first line
         equationString = eqName + " = "
-        eqs.printf(equationString)
 
         # Do for each line
         inp.each do |line|
-            equationString << (line[0..-3] + " ")
+            equationString << (line[0..-2] + " ")
             countIn += 1
         end
 
         # silence output
         equationString << ";"
+
+        # remove \n
+        equationString.gsub! ("\n")
 
         # write in output
         eqs.puts(equationString)
@@ -1464,16 +1491,16 @@ elsif selectionVal == 4
 
         # print to file
         # first line
-        out.puts "function [" + eqName +"] = " + functionName + "(x)"
+        out.puts "function [" + eqName + "] = " + functionName + "(x)"
         countOut += 1
 
         # varDef
         for i in 0..(vars.length - 1)
-            out.puts vars[i] + " = x(" + (i + 1).to_s + ");"
+            out.puts vars[i].gsub("\r","") + " = x(" + (i + 1).to_s + ");"
             countOut += 1
         end
         # insert equation
-        out.puts(equationString)
+        out.puts(equationString.gsub("\r",""))
 
         # endfunction
         out.puts("end")
@@ -1496,6 +1523,7 @@ elsif selectionVal == 4
         if answer == "y"
             # Removing unused files
             File.delete("out1.txt")
+            File.delete(inName)
         end
 
         # Finish
