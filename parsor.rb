@@ -231,6 +231,7 @@ if selectionVal == 1
         countOut += 1
         # varDef
         for i in 0..(vars.length - 1)
+            # remove windows line endings with the gsub statement
             out.puts  vars[i].gsub("\r","") + " = x(" + (i + 1).to_s + ");"
             countOut += 1
         end
@@ -1496,6 +1497,7 @@ elsif selectionVal == 4
 
         # varDef
         for i in 0..(vars.length - 1)
+            # remove windows line endings with the gsub statement
             out.puts vars[i].gsub("\r","") + " = x(" + (i + 1).to_s + ");"
             countOut += 1
         end
