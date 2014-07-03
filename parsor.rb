@@ -231,12 +231,12 @@ if selectionVal == 1
         countOut += 1
         # varDef
         for i in 0..(vars.length - 1)
-            out.puts vars[i] + " = x(" + (i + 1).to_s + ");"
+            out.puts  vars[i].gsub("\r","") + " = x(" + (i + 1).to_s + ");"
             countOut += 1
         end
 
         # insert equation
-        out.puts(equationString)
+        out.puts(equationString.gsub("\r",""))
 
         # endfunction
         out.puts("end")
@@ -1496,11 +1496,11 @@ elsif selectionVal == 4
 
         # varDef
         for i in 0..(vars.length - 1)
-            out.puts vars[i] + " = x(" + (i + 1).to_s + ");"
+            out.puts vars[i].gsub("\r","") + " = x(" + (i + 1).to_s + ");"
             countOut += 1
         end
         # insert equation
-        out.puts(equationString)
+        out.puts(equationString.gsub("\r",""))
 
         # endfunction
         out.puts("end")
