@@ -1,4 +1,4 @@
-function [] = runparsor(method, filename, predictionLabel, firstChar, functionName)
+function [] = runparsor(parsorExe, method, filename, predictionLabel, firstChar, functionName)
 % call Parsor from matlab, automagically
 % for inputs, see inputs.md
 
@@ -61,7 +61,8 @@ end
 fclose(configFile);
 
 % write runFile
-fprintf(runFile,'v09_parsor.exe <input.txt');
+fprintf(runFile, parsorExe);
+fprintf(runFile, '<input.txt');
 fclose(runFile);
 
 % run system
