@@ -95,6 +95,22 @@ Die jeweils aktuelle Parsorversion kann unter \cite{parsor} heruntergeladen werd
 Ich würde mich freuen wenn wir über Github einen Weg finden, Parsor weiter zu verbessern.
 
 \clearpage
+\section{Automatischer Aufruf aus Matlab}
+
+Über die \texttt{runparsor.m} Datei lässt sich der Parsor auch automatisch aus Matlab aufrufen, dabei können Folgende Optionen gesetzt werden
+
+\begin{enumerate}
+	\item Name der Parsor-exe
+	\item Verwendetes Verfahren: LR, M5P, M5R, PR
+	\item Dateiname der Eingangsdaten
+	\item Vorhersage Label, bei M5P, M5R 
+	\item Erster Buchstabe der Variable
+	\item Funktionsname
+\end{enumerate}
+
+Ein Beispielaufruf kann sein: \texttt{runparsor('parsor.exe','LR','lr.txt','','X','testfunc')}.
+
+\clearpage
 \renewcommand{\refname}{\section{Links}}
 \bibliographystyle{plaindin}
 \bibliography{links}
