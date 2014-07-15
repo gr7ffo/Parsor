@@ -1,5 +1,5 @@
 function [] = runparsor(parsorExe, method, filename, predictionLabel, firstChar, functionName)
-% call Parsor from matlab, automagically
+% call Parsor from matlab, automagically - e.g.: runparsor('v09_parsor.exe','LR','lr.txt','','X','testfunc')
 % for inputs, see inputs.md
 
 % open)
