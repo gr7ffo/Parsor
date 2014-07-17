@@ -7,7 +7,7 @@ configFile = fopen('input.txt', 'w+');
 runFile = fopen('run.bat', 'w+');
 
 % method to use
-if method == 'LR'
+if strcmp(method, 'LR')
     % method
     fprintf(configFile, '%s\n', '1');
     % filename
@@ -18,7 +18,7 @@ if method == 'LR'
     fprintf(configFile, '%s\n', functionName);
     % clean
     fprintf(configFile, '%s\n', 'y');
-elseif method == 'M5P'
+elseif strcmp(method, 'M5P')
     % method
     fprintf(configFile, '%s\n', '2');
     % filename
@@ -31,7 +31,7 @@ elseif method == 'M5P'
     fprintf(configFile, '%s\n', functionName);
     % clean
     fprintf(configFile, '%s\n', 'y');
-elseif method == 'M5R'
+elseif strcmp(method, 'M5R')
     % method
     fprintf(configFile, '%s\n', '3');
     % filename
