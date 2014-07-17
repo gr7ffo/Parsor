@@ -6,11 +6,11 @@ function [] = runrapidminer(pathToRapidminer, pathToProcess, processName)
 %pathToProcess = 'E:\Dropbox\University\Bachelor_7_2014-SS_BA\01_Bachelorarbeit\06_Parser\testing\';
 
 % some variables
-disk = pathToRapidminer(1:2);
-rapidminer = 'rapidminer-batch.bat -f';
+rapidminer = 'rapidminer-batch.bat';
+startVal = '-f';
 
 % system call
-call =  ['cd', ' ', '"', pathToRapidminer, '"', ' ', '&&', ' ', disk, rapidminer, ' ', '"', pathToProcess, processName, '"'];
+call =  ['"', pathToRapidminer, rapidminer, '"' ' ', startVal, ' ', '"', pathToProcess, processName, '"'];
 system(call)
 
 end
