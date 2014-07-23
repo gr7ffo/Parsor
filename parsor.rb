@@ -339,123 +339,12 @@ elsif selectionVal == 2
         # Generate output
         puts "1: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
-
-        # ifElser (THE Brain)
         ###########################################################################
-
-        # Files ready for Work
-        # M5Pequations.m <= parsEquation
-        # out1.txt <= preParser
-        # out2.txt <= ()remover
-        # out3.txt <= ifElser
-        puts "2: Handling the if and elseif operators"
-
-        # Inputfile
-        inName = "out3.txt"
-
-        # Outputfile - not activated
-        #printf "4: Please enter the desired Name for my main output (e.g. out.m): "
-        #outName = gets.chomp
-        outName = "out.m"
-
+        # use the same inputscheme for all runparsor.m operations! 
         # First Char of Variable
         printf "2: Please enter the First Char of your Variables (e.g. X for X_T0_A0): "
         varChar = gets.chomp
-
-        # reset Linecounter
-        countIn = 1
-        countOut = 1
-
-        # Generate and open Files
-        inp = File.open(inName, "r+")
-        out = File.open(outName, "w")
-
-        # Array for line lengths
-        lengths = []
-
-        # Do for each line to get lengths
-        inp.each do |line|
-            lengths[countIn] = line.length
-            countIn += 1
-        end
-
-        # *sigh* Filehandling...
-        inp.close
-        out.close
-
-        # reset Linecounter
-        countIn = 1
-        countOut = 1
-
-        # Generate and open Files
-        inp = File.open(inName, "r+")
-        out = File.open(outName, "w")
-
-        # Safe positions of your variable for each line
-        posVar = []
-
-        # do this
-        inp.each do |line|
-            posVar[countIn] = line.index(varChar)
-            countIn += 1
-        end
-
-        # *sigh* Filehandling...
-        inp.close
-        out.close
-
-        # reset Linecounter
-        countIn = 1
-        countOut = 1
-
-        # Generate and open Files
-        inp = File.open(inName, "r+")
-        out = File.open(outName, "w")
-
-        #ifCounter
-        ifCounter = 0
-
-        # Dodo - ifElser (works?)
-        inp.each do |line|
-            if countIn == 1
-                out.puts("if " + line)
-                ifCounter += 1
-                countOut += 1
-            elsif posVar[countIn] > posVar[(countIn - 1)]
-                out.puts("if " + line)
-                ifCounter += 1
-                countOut += 1
-            elsif posVar[countIn] == posVar[(countIn - 1)]
-                out.puts("elseif " + line)
-                countOut += 1
-            elsif posVar[countIn] < posVar[(countIn - 1)]
-                difference = posVar[(countIn - 1)] - posVar[countIn]
-                countToEnd = difference/3
-                for i in 1..countToEnd
-                    out.puts("end")
-                    ifCounter -= 1
-                end
-                out.puts("elseif " + line)
-            end
-            countIn += 1
-        end
-
-        # ending all ifs (hope)
-        for i in 1..ifCounter
-            out.puts("end")
-            countOut += 1
-        end
-
-        # *sigh* Filehandling...
-        inp.close
-        out.close
-
-        # Generating output
-        puts "2: Outputfile " + outName + " and " + countOut.to_s + " lines written"
-
-        # Needed later for functionfile generation
-        calcFile = outName
-
+        ###########################################################################
 
         # parsEquation
         ###########################################################################
@@ -612,7 +501,119 @@ elsif selectionVal == 2
 
         # Generate Output
         puts "4: Outputfile " + outName + " and " + countOut.to_s + " lines written"
-        
+
+
+        # ifElser (THE Brain)
+        ###########################################################################
+
+        # Files ready for Work
+        # M5Pequations.m <= parsEquation
+        # out1.txt <= preParser
+        # out2.txt <= ()remover
+        # out3.txt <= ifElser
+        puts "5: Handling the if and elseif operators"
+
+        # Inputfile
+        inName = "out3.txt"
+
+        # Outputfile - not activated
+        #printf "4: Please enter the desired Name for my main output (e.g. out.m): "
+        #outName = gets.chomp
+        outName = "out.m"
+
+        # reset Linecounter
+        countIn = 1
+        countOut = 1
+
+        # Generate and open Files
+        inp = File.open(inName, "r+")
+        out = File.open(outName, "w")
+
+        # Array for line lengths
+        lengths = []
+
+        # Do for each line to get lengths
+        inp.each do |line|
+            lengths[countIn] = line.length
+            countIn += 1
+        end
+
+        # *sigh* Filehandling...
+        inp.close
+        out.close
+
+        # reset Linecounter
+        countIn = 1
+        countOut = 1
+
+        # Generate and open Files
+        inp = File.open(inName, "r+")
+        out = File.open(outName, "w")
+
+        # Safe positions of your variable for each line
+        posVar = []
+
+        # do this
+        inp.each do |line|
+            posVar[countIn] = line.index(varChar)
+            countIn += 1
+        end
+
+        # *sigh* Filehandling...
+        inp.close
+        out.close
+
+        # reset Linecounter
+        countIn = 1
+        countOut = 1
+
+        # Generate and open Files
+        inp = File.open(inName, "r+")
+        out = File.open(outName, "w")
+
+        #ifCounter
+        ifCounter = 0
+
+        # Dodo - ifElser (works?)
+        inp.each do |line|
+            if countIn == 1
+                out.puts("if " + line)
+                ifCounter += 1
+                countOut += 1
+            elsif posVar[countIn] > posVar[(countIn - 1)]
+                out.puts("if " + line)
+                ifCounter += 1
+                countOut += 1
+            elsif posVar[countIn] == posVar[(countIn - 1)]
+                out.puts("elseif " + line)
+                countOut += 1
+            elsif posVar[countIn] < posVar[(countIn - 1)]
+                difference = posVar[(countIn - 1)] - posVar[countIn]
+                countToEnd = difference/3
+                for i in 1..countToEnd
+                    out.puts("end")
+                    ifCounter -= 1
+                end
+                out.puts("elseif " + line)
+            end
+            countIn += 1
+        end
+
+        # ending all ifs (hope)
+        for i in 1..ifCounter
+            out.puts("end")
+            countOut += 1
+        end
+
+        # *sigh* Filehandling...
+        inp.close
+        out.close
+
+        # Generating output
+        puts "5: Outputfile " + outName + " and " + countOut.to_s + " lines written"
+
+        # Needed later for functionfile generation
+        calcFile = outName
 
         # genMatFun
         ###########################################################################
