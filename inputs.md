@@ -14,7 +14,7 @@
 4. Functionname
 5. Clean
 
-# M5P
+# M5R
 1. Filename
 2. First Char of variable
 3. Predictionlabel
