@@ -3,19 +3,19 @@
 # Written by: Christopher Sauer, 2014
 
 # tested and working on:
+# * ruby >= 2.0 is a strong requirement
 # * ruby 2.1.1p76 (2014-02-24 revision 45161) [x86_64-darwin13.0]
 # * ruby 2.0.0-p451 (x64) [win]
-# should run if ruby >= 2.0.0
 
 # see github for more details, issues, pull requests
 # https://github.com/Balagrio/Parsor
 # better mail me: christopher.sauer@fau.de
 
 # Important stops in file
-# line ca. 45--264 Linear Regression
-# line ca. 265--799 M5P-Tree
-# line ca. 800--1278 M5-Rules
-# line ca. 1279--1499 Polynomial Regression
+# line ca. 45   Linear Regression
+# line ca. 265  M5P-Tree
+# line ca. 800  M5-Rules
+# line ca. 1279 Polynomial Regression
 
 #logo
 $logo = <<EOF
@@ -24,8 +24,17 @@ ____
 | |_) / _` | '__/ __|/ _ \| '__|
 |  __/ (_| | |  \__ \ (_) | |
 |_|   \__,_|_|  |___/\___/|_|
-                              v0.9
+                              v1.0
 written by Christopher Sauer, 2014
+EOF
+
+# Selection Menu
+$menu = <<EOF
+0: Which type do you want me to parse?"
+(1) - LinReg
+(2) - M5P
+(3) - M5Rules
+(4) - PolReg
 EOF
 
 # Welcome
@@ -33,13 +42,7 @@ puts $logo
 puts ""
 puts "0: Executing Parsor"
 $choiceMade = false
-
-# Selection Menu
-puts "0: Which type do you want me to parse?"
-puts "(1) - LinReg"
-puts "(2) - M5P"
-puts "(3) - M5Rules"
-puts "(4) - PolReg"
+puts $menu
 
 # Your selection
 printf "0: "
