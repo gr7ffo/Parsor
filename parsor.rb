@@ -340,163 +340,6 @@ elsif selectionVal == 2
         puts "1: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
 
-        # parsEquation
-        ###########################################################################
-
-        # Files ready for Work
-        # out1.txt <= preParser
-        puts "2: Parsing Equations"
-
-        # Searchterm for Equations
-        printf "2: Enter your prediction(label) (e.g. UmformgradMAX): "
-        searchTerm = gets.chomp
-        searchTermFound = false
-        lineSearchTermFound = 0
-
-        # Equationterm, not necessary anymore
-        #printf "2: Enter your modelname (e.g. LM for Linear Model): "
-        eqName = "LM"
-
-        # Filenames input
-        inName = "out1.txt"
-        eqsName = "M5Pequations.m"
-
-        # Files
-        inp = File.open(inName, "r+")
-        eqs = File.open(eqsName, "w")
-
-        # Linecounter Inputfile
-        countIn = 1
-        # Equationcounter
-        countEq = 1
-
-        # Stringsave
-        addString = ""
-
-        # Equationnumber
-        eqNum = 1
-
-        # Equationswrite started yet?
-        startEquations = false
-
-        # Do for each line
-        inp.each do |line|
-            if line[searchTerm]
-                searchTermFound = true
-                lineSearchTermFound = countIn
-                addString = eqName + eqNum.to_s + " = "
-                # Number your Equations
-                eqNum += 1
-            elsif searchTermFound
-                addString << line.to_s
-                if line.length == 1
-                    searchTermFound = false
-                    # Output
-                    eqs.printf(addString.delete "\n")
-                    # silence console out in Matlab
-                    eqs.printf(";")
-                    eqs.printf("\n")
-                    countEq += 1
-                    addString = ""
-                end
-            end
-            countIn += 1
-        end
-
-        # write to files
-        puts "2: Writing to Files..."
-        inp.close
-        eqs.close
-        # reopen input
-        inp = File.open(inName, "r+")
-        # Generate output
-        puts "2: " + eqNum.to_s + " Equation(s) written to " + eqsName
-
-        # reset Linecounter
-        countIn = 1
-        # save values in array
-        sav = []
-        i = 0
-        # Find start of equations
-        inp.each do |line|
-            if line[searchTerm]
-                sav[i] = countIn
-                i += 1
-            end
-            countIn += 1
-        end
-
-        # equation found? (optional)
-        #puts "Equation found on line " + sav[0].to_s
-
-        # cut Equations from out1.txt, leads to out2.txt
-        # But first let me save files
-        inp.close
-        outName = "out2.txt"
-        inp = File.open(inName, "r+")
-        out = File.open(outName, "w")
-
-        # reset Linecounter
-        countIn = 1
-        countOut = 1
-        # Write to outputfile
-        inp.each do |line|
-            if countIn < (sav[0] - 1) && line.length > 1
-                out.puts(line)
-                countOut += 1
-            end
-            countIn += 1
-        end
-
-        # *sigh* Filehandling...
-        inp.close
-        out.close
-
-        # Generating Output
-        puts "2: Outputfile " + outName + " and " + countOut.to_s + " lines written"
-
-
-        # ()remover
-        ###########################################################################
-
-        puts "3: Removing (...)"
-
-        # Files ready for Work
-        # M5Pequations.m <= parsEquation
-        # out1.txt <= preParser
-        # out2.txt <= ()remover
-
-        # file handling
-        inName = "out2.txt"
-        outName = "out3.txt"
-
-        # reset Linecounter
-        countIn = 1
-        countOut = 1
-
-        # Generate and open Files
-        inp = File.open(inName, "r+")
-        out = File.open(outName, "w")
-
-        # cut line from '('
-        inp.each do |line|
-            if line["("]
-                newline = line[0..(line.index('(') - 1)]
-                out.puts(newline)
-            else
-                out.puts(line)
-            end
-            countIn +=1
-        end
-
-        # *sigh* Filehandling...
-        inp.close
-        out.close
-
-        # Generate Output
-        puts "3: Outputfile " + outName + " and " + countOut.to_s + " lines written"
-
-
         # ifElser (THE Brain)
         ###########################################################################
 
@@ -505,7 +348,7 @@ elsif selectionVal == 2
         # out1.txt <= preParser
         # out2.txt <= ()remover
         # out3.txt <= ifElser
-        puts "4: Handling the if and elseif operators"
+        puts "2: Handling the if and elseif operators"
 
         # Inputfile
         inName = "out3.txt"
@@ -516,7 +359,7 @@ elsif selectionVal == 2
         outName = "out.m"
 
         # First Char of Variable
-        printf "4: Please enter the First Char of your Variables (e.g. X for X_T0_A0): "
+        printf "2: Please enter the First Char of your Variables (e.g. X for X_T0_A0): "
         varChar = gets.chomp
 
         # reset Linecounter
@@ -608,11 +451,168 @@ elsif selectionVal == 2
         out.close
 
         # Generating output
-        puts "4: Outputfile " + outName + " and " + countOut.to_s + " lines written"
+        puts "2: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
         # Needed later for functionfile generation
         calcFile = outName
 
+
+        # parsEquation
+        ###########################################################################
+
+        # Files ready for Work
+        # out1.txt <= preParser
+        puts "3: Parsing Equations"
+
+        # Searchterm for Equations
+        printf "3: Enter your prediction(label) (e.g. UmformgradMAX): "
+        searchTerm = gets.chomp
+        searchTermFound = false
+        lineSearchTermFound = 0
+
+        # Equationterm, not necessary anymore
+        #printf "2: Enter your modelname (e.g. LM for Linear Model): "
+        eqName = "LM"
+
+        # Filenames input
+        inName = "out1.txt"
+        eqsName = "M5Pequations.m"
+
+        # Files
+        inp = File.open(inName, "r+")
+        eqs = File.open(eqsName, "w")
+
+        # Linecounter Inputfile
+        countIn = 1
+        # Equationcounter
+        countEq = 1
+
+        # Stringsave
+        addString = ""
+
+        # Equationnumber
+        eqNum = 1
+
+        # Equationswrite started yet?
+        startEquations = false
+
+        # Do for each line
+        inp.each do |line|
+            if line[searchTerm]
+                searchTermFound = true
+                lineSearchTermFound = countIn
+                addString = eqName + eqNum.to_s + " = "
+                # Number your Equations
+                eqNum += 1
+            elsif searchTermFound
+                addString << line.to_s
+                if line.length == 1
+                    searchTermFound = false
+                    # Output
+                    eqs.printf(addString.delete "\n")
+                    # silence console out in Matlab
+                    eqs.printf(";")
+                    eqs.printf("\n")
+                    countEq += 1
+                    addString = ""
+                end
+            end
+            countIn += 1
+        end
+
+        # write to files
+        puts "2: Writing to Files..."
+        inp.close
+        eqs.close
+        # reopen input
+        inp = File.open(inName, "r+")
+        # Generate output
+        puts "3: " + eqNum.to_s + " Equation(s) written to " + eqsName
+
+        # reset Linecounter
+        countIn = 1
+        # save values in array
+        sav = []
+        i = 0
+        # Find start of equations
+        inp.each do |line|
+            if line[searchTerm]
+                sav[i] = countIn
+                i += 1
+            end
+            countIn += 1
+        end
+
+        # equation found? (optional)
+        #puts "Equation found on line " + sav[0].to_s
+
+        # cut Equations from out1.txt, leads to out2.txt
+        # But first let me save files
+        inp.close
+        outName = "out2.txt"
+        inp = File.open(inName, "r+")
+        out = File.open(outName, "w")
+
+        # reset Linecounter
+        countIn = 1
+        countOut = 1
+        # Write to outputfile
+        inp.each do |line|
+            if countIn < (sav[0] - 1) && line.length > 1
+                out.puts(line)
+                countOut += 1
+            end
+            countIn += 1
+        end
+
+        # *sigh* Filehandling...
+        inp.close
+        out.close
+
+        # Generating Output
+        puts "3: Outputfile " + outName + " and " + countOut.to_s + " lines written"
+
+
+        # ()remover
+        ###########################################################################
+
+        puts "4: Removing (...)"
+
+        # Files ready for Work
+        # M5Pequations.m <= parsEquation
+        # out1.txt <= preParser
+        # out2.txt <= ()remover
+
+        # file handling
+        inName = "out2.txt"
+        outName = "out3.txt"
+
+        # reset Linecounter
+        countIn = 1
+        countOut = 1
+
+        # Generate and open Files
+        inp = File.open(inName, "r+")
+        out = File.open(outName, "w")
+
+        # cut line from '('
+        inp.each do |line|
+            if line["("]
+                newline = line[0..(line.index('(') - 1)]
+                out.puts(newline)
+            else
+                out.puts(line)
+            end
+            countIn +=1
+        end
+
+        # *sigh* Filehandling...
+        inp.close
+        out.close
+
+        # Generate Output
+        puts "4: Outputfile " + outName + " and " + countOut.to_s + " lines written"
+        
 
         # genMatFun
         ###########################################################################
