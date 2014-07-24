@@ -2,11 +2,22 @@
 
 A Parser, written in Ruby. Its purpose is creating Matlabfunctions from Rapidminer results.
 
-## works for following RapidMiner Tools
+## works for following RapidMiner Modules
 * Linear Regression Analysis 
 * Polynomial Regression Analysis
 * M5-Tree Weka Analysis
 * M5-Rules Weka Analysis
+
+## folder structure
+* anleitung -> the documentation of parsor in german
+* .gitattributes -> the necessary gitattributes file
+* .gitignore -> the necessary gitignore file
+* README.md -> this readme file
+* inputs.md -> description of necessary inputs for parsor
+* parsor.exe -> the exe file for windows user
+* parsor.rb -> the ruby development file
+* runparsor.m -> the automatic matlab calling file (windows)
+* runrapidminer.m -> the automatic rapidminer calling file (windows)
 
 ## see github for more details, issues, pull requests
 * https://github.com/Balagrio/Parsor 
