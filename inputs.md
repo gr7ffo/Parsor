@@ -9,8 +9,8 @@
 
 # M5P
 1. Filename
-2. Predictionlabel
-3. First Char of variable
+2. First Char of variable
+3. Predictionlabel
 4. Functionname
 5. Clean
 

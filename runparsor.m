@@ -23,10 +23,10 @@ elseif strcmp(method, 'M5P')
     fprintf(configFile, '%s\n', '2');
     % filename
     fprintf(configFile, '%s\n', filename);
-    % prediciton label
-    fprintf(configFile, '%s\n', predictionLabel);
     % first char of variable
     fprintf(configFile, '%s\n', firstChar);
+    % prediciton label
+    fprintf(configFile, '%s\n', predictionLabel);
     % functionname
     fprintf(configFile, '%s\n', functionName);
     % clean

@@ -3,29 +3,38 @@
 # Written by: Christopher Sauer, 2014
 
 # tested and working on:
+# * ruby >= 2.0 is a strong requirement
 # * ruby 2.1.1p76 (2014-02-24 revision 45161) [x86_64-darwin13.0]
 # * ruby 2.0.0-p451 (x64) [win]
-# should run if ruby >= 2.0.0
 
 # see github for more details, issues, pull requests
 # https://github.com/Balagrio/Parsor
 # better mail me: christopher.sauer@fau.de
 
 # Important stops in file
-# line ca. 45--264 Linear Regression
-# line ca. 265--799 M5P-Tree
-# line ca. 800--1278 M5-Rules
-# line ca. 1279--1499 Polynomial Regression
+# line ca. 45   Linear Regression
+# line ca. 265  M5P-Tree
+# line ca. 800  M5-Rules
+# line ca. 1279 Polynomial Regression
 
 #logo
 $logo = <<EOF
-____
-|  _ \ __ _ _ __ ___  ___  _ __
-| |_) / _` | '__/ __|/ _ \| '__|
-|  __/ (_| | |  \__ \ (_) | |
-|_|   \__,_|_|  |___/\___/|_|
-                              v0.9
+   ___                          
+  / _ \__ _ _ __ ___  ___  _ __ 
+ / /_)/ _` | '__/ __|/ _ \| '__|
+/ ___/ (_| | |  \__ \ (_) | |   
+\/    \__,_|_|  |___/\___/|_|    
+                              v1.0
 written by Christopher Sauer, 2014
+EOF
+
+# Selection Menu
+$menu = <<EOF
+0: Which type do you want me to parse?"
+(1) - LinReg
+(2) - M5P
+(3) - M5Rules
+(4) - PolReg
 EOF
 
 # Welcome
@@ -33,13 +42,7 @@ puts $logo
 puts ""
 puts "0: Executing Parsor"
 $choiceMade = false
-
-# Selection Menu
-puts "0: Which type do you want me to parse?"
-puts "(1) - LinReg"
-puts "(2) - M5P"
-puts "(3) - M5Rules"
-puts "(4) - PolReg"
+puts $menu
 
 # Your selection
 printf "0: "
@@ -339,16 +342,22 @@ elsif selectionVal == 2
         # Generate output
         puts "1: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
+        ###########################################################################
+        # use the same inputscheme for all runparsor.m operations! 
+        # First Char of Variable
+        printf "2: Please enter the First Char of your Variables (e.g. X for X_T0_A0): "
+        varChar = gets.chomp
+        ###########################################################################
 
         # parsEquation
         ###########################################################################
 
         # Files ready for Work
         # out1.txt <= preParser
-        puts "2: Parsing Equations"
+        puts "3: Parsing Equations"
 
         # Searchterm for Equations
-        printf "2: Enter your prediction(label) (e.g. UmformgradMAX): "
+        printf "3: Enter your prediction(label) (e.g. UmformgradMAX): "
         searchTerm = gets.chomp
         searchTermFound = false
         lineSearchTermFound = 0
@@ -410,7 +419,7 @@ elsif selectionVal == 2
         # reopen input
         inp = File.open(inName, "r+")
         # Generate output
-        puts "2: " + eqNum.to_s + " Equation(s) written to " + eqsName
+        puts "3: " + eqNum.to_s + " Equation(s) written to " + eqsName
 
         # reset Linecounter
         countIn = 1
@@ -453,13 +462,13 @@ elsif selectionVal == 2
         out.close
 
         # Generating Output
-        puts "2: Outputfile " + outName + " and " + countOut.to_s + " lines written"
+        puts "3: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
 
         # ()remover
         ###########################################################################
 
-        puts "3: Removing (...)"
+        puts "4: Removing (...)"
 
         # Files ready for Work
         # M5Pequations.m <= parsEquation
@@ -494,7 +503,7 @@ elsif selectionVal == 2
         out.close
 
         # Generate Output
-        puts "3: Outputfile " + outName + " and " + countOut.to_s + " lines written"
+        puts "4: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
 
         # ifElser (THE Brain)
@@ -505,7 +514,7 @@ elsif selectionVal == 2
         # out1.txt <= preParser
         # out2.txt <= ()remover
         # out3.txt <= ifElser
-        puts "4: Handling the if and elseif operators"
+        puts "5: Handling the if and elseif operators"
 
         # Inputfile
         inName = "out3.txt"
@@ -514,10 +523,6 @@ elsif selectionVal == 2
         #printf "4: Please enter the desired Name for my main output (e.g. out.m): "
         #outName = gets.chomp
         outName = "out.m"
-
-        # First Char of Variable
-        printf "4: Please enter the First Char of your Variables (e.g. X for X_T0_A0): "
-        varChar = gets.chomp
 
         # reset Linecounter
         countIn = 1
@@ -608,11 +613,10 @@ elsif selectionVal == 2
         out.close
 
         # Generating output
-        puts "4: Outputfile " + outName + " and " + countOut.to_s + " lines written"
+        puts "5: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
         # Needed later for functionfile generation
         calcFile = outName
-
 
         # genMatFun
         ###########################################################################
