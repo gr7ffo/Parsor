@@ -19,11 +19,11 @@
 
 #logo
 $logo = <<EOF
-   ___                          
-  / _ \__ _ _ __ ___  ___  _ __ 
+   ___
+  / _ \__ _ _ __ ___  ___  _ __
  / /_)/ _` | '__/ __|/ _ \| '__|
-/ ___/ (_| | |  \__ \ (_) | |   
-\/    \__,_|_|  |___/\___/|_|    
+/ ___/ (_| | |  \__ \ (_) | |
+\/    \__,_|_|  |___/\___/|_|
                               v1.0
 written by Christopher Sauer, 2014
 EOF
@@ -343,7 +343,7 @@ elsif selectionVal == 2
         puts "1: Outputfile " + outName + " and " + countOut.to_s + " lines written"
 
         ###########################################################################
-        # use the same inputscheme for all runparsor.m operations! 
+        # use the same inputscheme for all runparsor.m operations!
         # First Char of Variable
         printf "2: Please enter the First Char of your Variables (e.g. X for X_T0_A0): "
         varChar = gets.chomp
