@@ -2,3 +2,4 @@
 testing/
 input/
 *.ini
+.idea
