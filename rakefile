@@ -1,6 +1,7 @@
 require "rake"
 
-desc "Says hello"
+task default: %w[test]
+
 task :test do
-      puts "Hello from Rake"
+    ruby "parsor.rb"
 end
