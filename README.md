@@ -1,4 +1,4 @@
-# Parsor
+# Parsor [![Build Status](https://travis-ci.org/Balagrio/Parsor.svg?branch=master)](https://travis-ci.org/balagrio/parsor)
 
 A Parser, written in Ruby. Its purpose is creating Matlabfunctions from Rapidminer results.
 
