@@ -1,0 +1,6 @@
+require "rake"
+
+desc "Says hello"
+task :test do
+      puts "Hello from Rake"
+end
