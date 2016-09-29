@@ -37,6 +37,13 @@ $menu = <<EOF
 (4) - PolReg
 EOF
 
+# Welcome
+puts $logo
+puts ""
+puts "0: Executing Parsor"
+$choiceMade = false
+puts $menu
+
 interactive_mode = -1
 if interactive_mode == -1
     puts "0"
@@ -48,13 +55,6 @@ else
     selectionVal = gets.chomp.to_i
     $choiceMade = true
 end
-
-# Welcome
-puts $logo
-puts ""
-puts "0: Executing Parsor"
-$choiceMade = false
-puts $menu
 
 # START
 ###########################################################################
