@@ -1,4 +1,4 @@
-# Parsor [![Build Status](https://travis-ci.org/Defaltus/Parsor.svg?branch=master)](https://travis-ci.org/Defaltus/parsor)
+# Parsor [![Build Status](https://travis-ci.org/defaltus/Parsor.svg?branch=master)](https://travis-ci.org/Defaltus/parsor)
 
 A Parser, written in Ruby. Its purpose is creating Matlabfunctions from Rapidminer results.
 
